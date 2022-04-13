@@ -6,15 +6,15 @@ Board::Board()
 {
 	
 	m_movingRec.setSize(sf::Vector2f((float)P_SIZE, (float)P_SIZE));
-	m_toolbar.setToolbar(m_boardSize.x);
+	//m_toolbar.setToolbar(m_boardSize.x);
 }
 
 //set the board size
 void Board::setBoard()
 {
-	m_grid.resize((int)m_boardSize.x);
+	/*m_grid.resize((int)m_boardSize.x);
 	for (size_t i = 0; i < m_boardSize.x; i++)
-		m_grid[i].resize((int)m_boardSize.y);
+		m_grid[i].resize((int)m_boardSize.y);*/
 }
 
 // draws the grid
@@ -64,8 +64,7 @@ void Board::mouseMoved(sf::Event event, sf::RenderWindow& window)
 	y = (int)pos.x / P_SIZE;
 
 	m_movingRec.setFillColor(sf::Color(176, 196, 222, 150));//the first
-	if (m_grid[x][y] != nullptr && m_eraseMode)
-		m_movingRec.setFillColor(sf::Color(0, 255, 0, 50));//ereser
+	
 	m_movingRec.setPosition(pos);
 	
 
