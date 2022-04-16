@@ -5,10 +5,9 @@ using std::cout;
 //run
 void Controller::run()
 {
-	//bool runAgain = false;
 
 	Board board;
-	sf::RenderWindow window(sf::VideoMode(14 * P_SIZE, (12 + 1) * P_SIZE),
+	sf::RenderWindow window(sf::VideoMode(920, 920),
 		"Circle The Cat!"
 		, sf::Style::Titlebar | sf::Style::Close);
 
