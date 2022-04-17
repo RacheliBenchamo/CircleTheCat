@@ -4,6 +4,8 @@
 #include <memory>
 #include<stdio.h>
 #include <fstream>
+#include <iostream>
+
 #include "macros.h"
 
 using std::fstream;

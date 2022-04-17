@@ -29,17 +29,19 @@ void Board::setGrid()
 	sf::Vector2f pos = { 35, 50 };
 	for (size_t i = 0; i < BOARD_LEN; i++)
 	{
-		std::vector<sf::CircleShape> circleRow;
+		std::vector<sf::CircleShape> currRow;
 		for (size_t j = 0; j < BOARD_LEN; j++)
 		{
 			sf::CircleShape circle(35);
 			circle.setPosition(pos);
-			circle.setFillColor(sf::Color::Green);
-			circleRow.push_back(circle);
-			pos.x += 75;
+			circle.setFillColor(sf::Color(240, 230, 140, 255));
+			circle.setOutlineColor(sf::Color(188, 143, 143, 255));
+			circle.setOutlineThickness(2);
+			currRow.push_back(circle);
+			pos.x += P_SIZE;
 		}
-		m_board.push_back(circleRow);
-		pos.y += 75;
+		m_board.push_back(currRow);
+		pos.y += P_SIZE;
 		if (i % 2 == 0) 
 			pos.x = 60;
 		else 
@@ -56,10 +58,13 @@ void Board::draw(sf::RenderWindow& window)const
 
 void Board::drawGrid(sf::RenderWindow& window)const
 {
+	int r = 1;
 	for (auto i : m_board)
 	{
 		for (auto j : i)
+		{
 			window.draw(j);
+		}
 	}
 }
 
@@ -68,27 +73,29 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 {
 	int x = event.mouseButton.x;
 	int y = event.mouseButton.y;
-	sf::Vector2f pos((float)(x - (x % P_SIZE)), (float)(y - (y % P_SIZE)));
+
+	sf::Vector2f pos((float)(x ), (float)(y));
 	//int count = 0;
 
-	/* Mouse click on Circle */
-	for (auto i : m_board)
-	{
-		for (auto j : i)
+	// Mouse click on circle
+	for (size_t i = 0; i < BOARD_LEN; i++)
+		for (size_t j = 0; j < BOARD_LEN; j++)
 		{
-			if (j.getFillColor() == sf::Color::Green)
+			if (m_board[i][j].getFillColor() == sf::Color(240, 230, 140, 255))
 			{
 				/* if mouse position is in circle range : pos.x < mouse.x < pos.x+radius and pos.y < mouse.y < pos.y+radius */
-				if (pos.x >j.getPosition().x && pos.x < (j.getPosition().x + (j.getRadius() * 2)) &&
-					pos.y > j.getPosition().y && pos.y < (j.getPosition().y + (j.getRadius() * 2)))
+				if (pos.x > m_board[i][j].getPosition().x && 
+					pos.x < (m_board[i][j].getPosition().x + (m_board[i][j].getRadius() * 2)) &&
+					pos.y > m_board[i][j].getPosition().y &&
+					pos.y < (m_board[i][j].getPosition().y + (m_board[i][j].getRadius() * 2)))
 				{
-					j.setFillColor(sf::Color::Black);
+					m_board[i][j].setFillColor(sf::Color(188, 143, 143, 255));
+					m_board[i][j].setOutlineColor(sf::Color(240, 230, 140, 255));
 					m_clickCount++;
 					/* do the cat move stuff*/
 				}
 			}
 		}
-	}
 }
 
 void Board::mouseMoved(sf::Event event, sf::RenderWindow& window)

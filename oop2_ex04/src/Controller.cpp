@@ -24,7 +24,7 @@ void Controller::run()
 
 		while (window.pollEvent(event))
 			CheckOutWhatEvent(window, event, board);
-
+		
 		window.display();
 	}
 }

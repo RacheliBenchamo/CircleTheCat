@@ -46,7 +46,7 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     )
 endif ()
 
-add_executable (${CMAKE_PROJECT_NAME} WIN32)
+add_executable (${CMAKE_PROJECT_NAME} )
 
 add_subdirectory (include)
 add_subdirectory (src)
@@ -64,3 +64,5 @@ set_target_properties (sfml-main sfml-system sfml-window sfml-graphics sfml-audi
 target_link_libraries (${CMAKE_PROJECT_NAME} sfml-audio sfml-graphics sfml-main)
 
 configure_file (C:/SFML/SFML-2.5.1/bin/openal32.dll ${CMAKE_BINARY_DIR} COPYONLY)
+
+
