@@ -1,6 +1,7 @@
 #include "Board.h"
 #include <iostream>
 #include "FileManager.h"
+#include "StatusBar.h"
 #include <array>
 
 class Controller
@@ -19,6 +20,7 @@ private:
 	sf::Sound m_backGroundMusic;
 	sf::RectangleShape m_background;
 	Board m_board;
+	StatusBar m_statusBar;
 
 	bool m_playButton;
 	bool m_existFile = true;

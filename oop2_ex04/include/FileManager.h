@@ -16,7 +16,7 @@ public:
 	const sf::SoundBuffer* getSound(sounds)const;
 	const sf::Texture* getMusicIcon(bool)const;
 	const sf::Texture* getBackGround(backgroundsType)const;
-	/*const sf::Font* getFont()const;*/
+	const sf::Font* getFont()const;
 
 private:
 	FileManager();

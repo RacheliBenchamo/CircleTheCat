@@ -3,7 +3,7 @@
 using std::cout;
 
 Controller::Controller()
-	:m_window(sf::VideoMode(920, 920),
+	:m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
 		"Circle The Cat!", sf::Style::Titlebar | sf::Style::Close)
 	//, m_playButton(true)
 {
@@ -25,6 +25,7 @@ void Controller::run()
 	{
 		m_window.clear(sf::Color(255, 240, 245, 255));
 		m_window.draw(m_background);
+		m_statusBar.draw(m_window);
 		m_board.draw(m_window);
 
 		

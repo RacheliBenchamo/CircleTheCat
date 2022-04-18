@@ -8,9 +8,9 @@
 FileManager::FileManager()
 {
 	//loads from all the files:
-	//loadFromFileIcons();
+	loadFromFileIcons();
 	loadAudio();
-	//loadMusicIcon();
+	loadMusicIcon();
 	loadBackgrounds();
 }
 //--------------------------------------------------
@@ -27,7 +27,7 @@ void FileManager::loadFromFileIcons()
 {
 	//m_icons[GIFT].loadFromFile("Gift.png");
 
-	//this->m_font.loadFromFile("Seagram tfb.ttf");
+	this->m_font.loadFromFile("Seagram tfb.ttf");
 }
 //--------------------------------------------------
 // load all the audio
@@ -87,9 +87,9 @@ const sf::Texture* FileManager::getBackGround(backgroundsType place)const
 //	//return &this->m_icons[place];
 //}
 //--------------------------------------------------
-//
-//const sf::Font* FileManager::getFont()const
-//{
-//	return &this->m_font;
-//}
-//
+
+const sf::Font* FileManager::getFont()const
+{
+	return &this->m_font;
+}
+

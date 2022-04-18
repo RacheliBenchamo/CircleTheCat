@@ -2,4 +2,5 @@
                                             "Controller.cpp"
                                             "Board.cpp"
                                             "FileManager.cpp"
+                                            "StatusBar.cpp"
                                               )

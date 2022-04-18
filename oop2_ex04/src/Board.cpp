@@ -26,26 +26,26 @@ void Board::setTitle()
 // draws the grid
 void Board::setGrid()
 {
-	sf::Vector2f pos = { 35, 50 };
+	sf::Vector2f pos = { ODD_DISTANCE, 150 };
 	for (size_t i = 0; i < BOARD_LEN; i++)
 	{
 		std::vector<sf::CircleShape> currRow;
 		for (size_t j = 0; j < BOARD_LEN; j++)
 		{
-			sf::CircleShape circle(35);
+			sf::CircleShape circle(CIRCLE_RADIUS);
 			circle.setPosition(pos);
 			circle.setFillColor(BASE_COLOR);
 			circle.setOutlineColor(CLICKED_COLOR);
 			circle.setOutlineThickness(2);
 			currRow.push_back(circle);
-			pos.x += P_SIZE;
+			pos.x += CIRCLE_DISTANCE;
 		}
 		m_board.push_back(currRow);
-		pos.y += P_SIZE;
+		pos.y += CIRCLE_DISTANCE;
 		if (i % 2 == 0) 
-			pos.x = 60;
+			pos.x = EVEN_DISTANCE;
 		else 
-			pos.x = 35;
+			pos.x = ODD_DISTANCE;
 	}
 }
 // draw all the relevent objects 
@@ -100,13 +100,10 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 
 void Board::mouseMoved(sf::Event event, sf::RenderWindow& window)
 {
+	int x = event.mouseButton.x;
+	int y = event.mouseButton.y;
 
-	int x = event.mouseMove.x;
-	int y = event.mouseMove.y;
-
-	sf::Vector2f pos((float)(x - (x % P_SIZE)), (float)(y - (y % P_SIZE)));
-	x = ((int)pos.y / P_SIZE) - 1;
-	y = (int)pos.x / P_SIZE;
+	sf::Vector2f pos((float)(x), (float)(y));
 
 	//m_movingCircle.setFillColor(sf::Color(176, 196, 222, 150));//the first
 	//m_movingCircle.setPosition(pos);
