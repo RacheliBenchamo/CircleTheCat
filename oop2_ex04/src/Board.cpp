@@ -7,7 +7,7 @@ Board::Board()
 	//m_movingCircle.setRadius(35);
 	setBoard();
 }
-
+ 
 //set the board
 void Board::setBoard()
 {
