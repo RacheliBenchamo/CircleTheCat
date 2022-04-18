@@ -10,7 +10,6 @@
 
 using std::fstream;
 //using std::cerr;
-const unsigned int P_SIZE = 75; // pixel size
 class Board
 {
 public:
