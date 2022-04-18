@@ -34,8 +34,8 @@ void Board::setGrid()
 		{
 			sf::CircleShape circle(35);
 			circle.setPosition(pos);
-			circle.setFillColor(sf::Color(240, 230, 140, 255));
-			circle.setOutlineColor(sf::Color(188, 143, 143, 255));
+			circle.setFillColor(BASE_COLOR);
+			circle.setOutlineColor(CLICKED_COLOR);
 			circle.setOutlineThickness(2);
 			currRow.push_back(circle);
 			pos.x += P_SIZE;
@@ -81,7 +81,7 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 	for (size_t i = 0; i < BOARD_LEN; i++)
 		for (size_t j = 0; j < BOARD_LEN; j++)
 		{
-			if (m_board[i][j].getFillColor() == sf::Color(240, 230, 140, 255))
+			if (m_board[i][j].getFillColor() == BASE_COLOR)
 			{
 				/* if mouse position is in circle range : pos.x < mouse.x < pos.x+radius and pos.y < mouse.y < pos.y+radius */
 				if (pos.x > m_board[i][j].getPosition().x && 
@@ -89,8 +89,8 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 					pos.y > m_board[i][j].getPosition().y &&
 					pos.y < (m_board[i][j].getPosition().y + (m_board[i][j].getRadius() * 2)))
 				{
-					m_board[i][j].setFillColor(sf::Color(188, 143, 143, 255));
-					m_board[i][j].setOutlineColor(sf::Color(240, 230, 140, 255));
+					m_board[i][j].setFillColor(CLICKED_COLOR);
+					m_board[i][j].setOutlineColor(BASE_COLOR);
 					m_clickCount++;
 					/* do the cat move stuff*/
 				}

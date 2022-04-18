@@ -7,12 +7,13 @@ const int BOARD_LEN = 11;
 
 // general data
 const unsigned int NUM_OF_ICONS = 14;
-const unsigned int NUM_OF_PLAYERS = 4;
 const unsigned int NUM_OF_SOUNDS = 14;
 const unsigned int NUM_OF_BACKGROUNDS = 5;
 const unsigned int NUM_OF_DIRECTION = 4;
-const unsigned int NUM_OF_GIFT_TYPES = 4;
 const unsigned int P_SIZE = 75; // pixel size
+
+const sf::Color BASE_COLOR = sf::Color(250, 235, 215, 255);
+const sf::Color CLICKED_COLOR = sf::Color(188, 143, 143, 255);
 
 //volume data
 const unsigned int VOLUME_BG = 5;
@@ -53,7 +54,6 @@ enum icons
 	CAT,
 	EMPTY
 };
-
 enum sounds
 {
 	
