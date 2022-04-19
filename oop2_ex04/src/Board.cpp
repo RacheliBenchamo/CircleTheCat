@@ -11,9 +11,12 @@ Board::Board()
 void Board::setBoard()
 {
 	setGrid();
+	//setColored()..for(i<m_maxColoredCircles)
+	// gril place
+	//m_grid[i][j].setFillColor(CLICKED_COLOR);
+	//m_grid[i][j].setOutlineColor(BASE_COLOR);
 	//setCat();
 }
-
 
 // draws the grid
 void Board::setGrid()
@@ -32,13 +35,14 @@ void Board::setGrid()
 			currRow.push_back(circle);
 			pos.x += CIRCLE_DISTANCE;
 		}
-		m_board.push_back(currRow);
+		m_grid.push_back(currRow);
 		pos.y += CIRCLE_DISTANCE;
 		if (i % 2 == 0) 
 			pos.x = EVEN_DISTANCE;
 		else 
 			pos.x = ODD_DISTANCE;
 	}
+	
 }
 // draw all the relevent objects 
 void Board::draw(sf::RenderWindow& window)const
@@ -51,7 +55,7 @@ void Board::draw(sf::RenderWindow& window)const
 void Board::drawGrid(sf::RenderWindow& window)const
 {
 	int r = 1;
-	for (auto i : m_board)
+	for (auto i : m_grid)
 	{
 		for (auto j : i)
 		{
@@ -72,16 +76,16 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 	for (size_t i = 0; i < BOARD_LEN; i++)
 		for (size_t j = 0; j < BOARD_LEN; j++)
 		{
-			if (m_board[i][j].getFillColor() == BASE_COLOR)
+			if (m_grid[i][j].getFillColor() == BASE_COLOR)
 			{
 				/* if mouse position is in circle range : pos.x < mouse.x < pos.x+radius and pos.y < mouse.y < pos.y+radius */
-				if (pos.x > m_board[i][j].getPosition().x && 
-					pos.x < (m_board[i][j].getPosition().x + (m_board[i][j].getRadius() * 2)) &&
-					pos.y > m_board[i][j].getPosition().y &&
-					pos.y < (m_board[i][j].getPosition().y + (m_board[i][j].getRadius() * 2)))
+				if (pos.x > m_grid[i][j].getPosition().x &&
+					pos.x < (m_grid[i][j].getPosition().x + (m_grid[i][j].getRadius() * 2)) &&
+					pos.y > m_grid[i][j].getPosition().y &&
+					pos.y < (m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2)))
 				{
-					m_board[i][j].setFillColor(CLICKED_COLOR);
-					m_board[i][j].setOutlineColor(BASE_COLOR);
+					m_grid[i][j].setFillColor(CLICKED_COLOR);
+					m_grid[i][j].setOutlineColor(BASE_COLOR);
 					m_clickCount++;
 					/* do the cat move stuff*/
 				}
@@ -89,37 +93,18 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 		}
 }
 
-void Board::mouseMoved(sf::Event event, sf::RenderWindow& window)
-{
-	int x = event.mouseButton.x;
-	int y = event.mouseButton.y;
-
-	sf::Vector2f pos((float)(x), (float)(y));
-
-	//m_movingCircle.setFillColor(sf::Color(176, 196, 222, 150));//the first
-	//m_movingCircle.setPosition(pos);
-}
-
-// checks if the mouse is in the window
-bool Board::inWindow(sf::Event event)const
-{
-	int x = event.mouseMove.x;
-	int y = event.mouseMove.y;
-	sf::Vector2f pos((float)(x - (x % P_SIZE)), (float)(y - (y % P_SIZE)));
-
-	x = ((int)pos.y / P_SIZE) - 1;
-	y = (int)pos.x / P_SIZE;
-
-	if (y >= 0 && x >= 0 && x < BOARD_LEN && y < BOARD_LEN)
-		return true;
-	return false;
-}
-
 void Board::restartLevel()
 {
-
+	//setboard
+    //fill color
 }
 void Board::startNewLevel()
 {
-
+	//setboard
+	//maxcircl-2;
+	//gril colored circle and check that its not in 6 6
+	//fill color
 }
+//fill color{
+//m_grid[vector.i.x][vector.i.y].setFillColor(CLICKED_COLOR);
+//m_grid[i][j].setOutlineColor(BASE_COLOR);

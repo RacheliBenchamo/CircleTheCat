@@ -32,8 +32,6 @@ private:
 	sf::Texture m_icons[NUM_OF_ICONS];
 	sf::Texture m_backgrounds[NUM_OF_BACKGROUNDS];
 	sf::Texture m_musicTexture[2];
-	sf::Texture m_playStopTexture[2];
-	sf::Texture m_restartIcon;
 	sf::SoundBuffer m_audio[NUM_OF_SOUNDS];
 	sf::Font m_font;
 };

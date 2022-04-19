@@ -38,11 +38,16 @@ void Controller::run()
 		if (m_board.getWinLevel())
 		{
 			if (levCount < NUM_OF_LEVELS)
+			{
+				//win msg
 				m_board.startNewLevel();
+				levCount++;
+			}
 			else
 				endGame();
 		}
 		if (m_board.getLoseLevel())
+			//lose msg
 			m_board.restartLevel();
 	}
 }
@@ -59,11 +64,6 @@ void Controller::CheckOutWhatEvent( sf::Event event)
 	case sf::Event::MouseButtonReleased:
 		m_board.mouseButtonReleased(event, m_window);
 		break;
-	case sf::Event::MouseMoved:
-		if (m_board.inWindow(event))
-			m_board.mouseMoved(event, m_window);
-		break;
-
 	}
 }
 
