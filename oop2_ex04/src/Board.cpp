@@ -4,22 +4,14 @@
 // board c-tor 
 Board::Board()
 {
-	//m_movingCircle.setRadius(35);
 	setBoard();
 }
  
 //set the board
 void Board::setBoard()
 {
-	setTitle();
 	setGrid();
-}
-
-void Board::setTitle()
-{
-	m_title.loadFromFile("Title.png");
-	m_spriteTitle.setTexture(m_title);
-	m_spriteTitle.setPosition(400, 0);
+	//setCat();
 }
 
 
@@ -51,8 +43,8 @@ void Board::setGrid()
 // draw all the relevent objects 
 void Board::draw(sf::RenderWindow& window)const
 {
-	window.draw(m_spriteTitle);
 	drawGrid(window);
+	//window.draw(m_cat);
 	//window.draw(m_movingCircle);
 }
 
@@ -75,7 +67,6 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 	int y = event.mouseButton.y;
 
 	sf::Vector2f pos((float)(x ), (float)(y));
-	//int count = 0;
 
 	// Mouse click on circle
 	for (size_t i = 0; i < BOARD_LEN; i++)
@@ -110,7 +101,7 @@ void Board::mouseMoved(sf::Event event, sf::RenderWindow& window)
 }
 
 // checks if the mouse is in the window
-bool Board::inWindow(sf::Event event)
+bool Board::inWindow(sf::Event event)const
 {
 	int x = event.mouseMove.x;
 	int y = event.mouseMove.y;

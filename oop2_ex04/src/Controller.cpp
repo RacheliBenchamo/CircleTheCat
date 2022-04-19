@@ -25,10 +25,9 @@ void Controller::run()
 	{
 		m_window.clear(sf::Color(255, 240, 245, 255));
 		m_window.draw(m_background);
-		m_statusBar.draw(m_window);
+		m_statusBar.draw(m_window, m_board.getClickCount(),m_board.getWinLevel());
 		m_board.draw(m_window);
 
-		
 		sf::Event event;
 
 		while (m_window.pollEvent(event))

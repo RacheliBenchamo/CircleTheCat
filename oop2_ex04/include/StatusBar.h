@@ -10,25 +10,24 @@ public:
 	StatusBar();
 	~StatusBar() {};
 
-	void updateLevel(bool);
+	void updateLevel(const bool);
+	void updateClicks(const int);
 	int getLevel() const;
-	void setLevel(int);
-	void draw(sf::RenderWindow&);
+	void setLevel(const int);
+	void draw(sf::RenderWindow&, const int, const bool);
 	void resetNumOfLevel();
 	bool containsMusicIcon(const sf::Event&) const;
-	void setMusicIcon(bool);
+	void setMusicIcon(const bool);
 
 private:
 	void setCurrClicksText();
 	void setLevelText();
+	void setHeadlineText();
 	void setMusicIcon();
-
-
-
 	
 	int m_level;
-
 	sf::Text m_currClicksText;
+	sf::Text m_headlineText;
 	sf::Text m_levelText;
 	sf::Font m_font;
 
