@@ -15,7 +15,7 @@ public:
 
 private:
 	void CheckOutWhatEvent( sf::Event );
-
+	void endGame();
 	sf::RenderWindow m_window;
 	sf::Sound m_backGroundMusic;
 	sf::RectangleShape m_background;

@@ -17,6 +17,7 @@ Controller::Controller()
 //run
 void Controller::run()
 {
+	int levCount = 0;
 	m_backGroundMusic.play();
 	m_backGroundMusic.setLoop(true);
 	m_backGroundMusic.setVolume(VOLUME_BG);
@@ -32,8 +33,17 @@ void Controller::run()
 
 		while (m_window.pollEvent(event))
 			CheckOutWhatEvent( event);
-		
 		m_window.display();
+
+		if (m_board.getWinLevel())
+		{
+			if (levCount < NUM_OF_LEVELS)
+				m_board.startNewLevel();
+			else
+				endGame();
+		}
+		if (m_board.getLoseLevel())
+			m_board.restartLevel();
 	}
 }
 
@@ -55,4 +65,9 @@ void Controller::CheckOutWhatEvent( sf::Event event)
 		break;
 
 	}
+}
+
+void Controller::endGame()
+{
+
 }

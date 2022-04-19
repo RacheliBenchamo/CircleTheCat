@@ -6,6 +6,7 @@
 const int BOARD_LEN = 11;
 
 // general data
+const unsigned int NUM_OF_LEVELS = 3;
 const unsigned int NUM_OF_ICONS = 14;
 const unsigned int NUM_OF_SOUNDS = 14;
 const unsigned int NUM_OF_BACKGROUNDS = 5;

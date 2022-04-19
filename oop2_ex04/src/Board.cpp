@@ -114,3 +114,12 @@ bool Board::inWindow(sf::Event event)const
 		return true;
 	return false;
 }
+
+void Board::restartLevel()
+{
+
+}
+void Board::startNewLevel()
+{
+
+}
