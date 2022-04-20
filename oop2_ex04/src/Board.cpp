@@ -30,6 +30,7 @@ void Board::setGrid()
 			sf::CircleShape circle(CIRCLE_RADIUS);
 
 			circle.setPosition(pos);
+			circle.setOutlineThickness(2);
 			currRow.push_back(circle);
 			pos.x += CIRCLE_DISTANCE;
 		}
@@ -73,11 +74,7 @@ void Board::ColoringCirclesToBeginningColor()
 {
 	for (int i = 0; i < BOARD_LEN; i++)
 		for (int j = 0; j < BOARD_LEN; j++)
-		{
-			m_grid[i][j].setFillColor(BASE_COLOR);
-			m_grid[i][j].setOutlineColor(CLICKED_COLOR);
-			m_grid[i][j].setOutlineThickness(2);
-		}
+			unColoringCurrentCircle(i,j);
 }
 //------------------------------------------------------
 
@@ -119,6 +116,7 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 				{
 					coloringCurrentCircle(i, j);
 					m_clickCount++;
+					m_clikedCircles.push_back(sf::Vector2f(i,j));
 					/* do the cat move stuff*/
 				}
 }
@@ -135,6 +133,26 @@ void Board::startNewLevel()
 {
 	m_maxColoredCircles -= 2;
 	setLevel();
+}
+//------------------------------------------------------
+
+void Board::undo()
+{
+	if (m_clickCount > 0)
+	{
+		sf::Vector2f pos = m_clikedCircles[m_clikedCircles.size()-1];
+		m_clikedCircles.pop_back();
+		//m_cat.takeBackToNextPos();
+		m_clickCount--;
+		unColoringCurrentCircle(pos.x, pos.y);
+	}
+}
+//------------------------------------------------------
+
+void Board::unColoringCurrentCircle(int x, int y)
+{
+	m_grid[x][y].setFillColor(BASE_COLOR);
+	m_grid[x][y].setOutlineColor(CLICKED_COLOR);
 }
 //------------------------------------------------------
 

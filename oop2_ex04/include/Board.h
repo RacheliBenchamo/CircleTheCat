@@ -24,7 +24,7 @@ public:
 	bool getLoseLevel() const { return m_loseLevel; }
 	void restartLevel();
 	void startNewLevel();
-
+	void undo();
 
 private:
 	void setBoard();
@@ -33,8 +33,10 @@ private:
 	void SelectRandomColoredCircles();
 	void UpdatePaintedCircles();
 	void ColoringCirclesToBeginningColor();
+	void unColoringCurrentCircle(int, int);
 	void coloringCurrentCircle(int, int);
 	void drawGrid(sf::RenderWindow& window)const;
+
 
 	int m_maxColoredCircles = 14;
 	bool m_winLevel = false;
@@ -43,5 +45,7 @@ private:
 	int m_clickCount = 0;
 	std::vector<std::vector<sf::CircleShape>> m_grid;
 	std::vector<sf::Vector2f> m_randomColoredCircles;	
+	std::vector<sf::Vector2f> m_clikedCircles;
+
 };
 
