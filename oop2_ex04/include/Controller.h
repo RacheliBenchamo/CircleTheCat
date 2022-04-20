@@ -15,6 +15,8 @@ public:
 
 private:
 	void CheckOutWhatEvent( sf::Event );
+	void handelMouseButtonReleased(sf::Event);
+	void handelMusicButtonReleased();
 	void endGame();
 	sf::RenderWindow m_window;
 	sf::Sound m_backGroundMusic;

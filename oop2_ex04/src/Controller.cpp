@@ -62,10 +62,46 @@ void Controller::CheckOutWhatEvent( sf::Event event)
 		m_window.close();
 		break;
 	case sf::Event::MouseButtonReleased:
-		m_board.mouseButtonReleased(event, m_window);
+		handelMouseButtonReleased(event);
 		break;
 	}
 }
+
+//----------------------------------------------
+//handle the event that occurred when the MouseButtonReleased
+
+void Controller::handelMouseButtonReleased(sf::Event event)
+{
+	if (m_statusBar.containsMusicIcon(event))
+		handelMusicButtonReleased();
+
+	/*else if (m_statusBar.containsStopAndPlayIcon(event))
+		handelStopPlayButtonReleased();
+
+	else if (m_statusBar.containsRestartIcon(event))
+		resetLevel();*/
+	else
+		m_board.mouseButtonReleased(event, m_window);
+}
+
+//----------------------------------------------
+//stopping or playing background music
+
+void Controller::handelMusicButtonReleased()
+{
+
+	if (m_backGroundMusic.getStatus() == sf::SoundSource::Status::Playing)
+	{
+		m_backGroundMusic.stop();
+		m_statusBar.setMusicIcon(false);
+	}
+	else
+	{
+		m_backGroundMusic.play();
+		m_statusBar.setMusicIcon(true);
+	}
+}
+//----------------------------------------------
 
 void Controller::endGame()
 {

@@ -109,6 +109,6 @@ void StatusBar::setLevelText()
 void StatusBar::setMusicIcon()
 {
 	this->m_musicIcon.setTexture(*FileManager::p2FileManager().getMusicIcon(true));
-	this->m_musicIcon.setPosition(WINDOW_WIDTH / 1.3,  BUFF_DISTANCE / 2);
+	this->m_musicIcon.setPosition(350,  BUFF_DISTANCE+15);
 	this->m_musicIcon.scale(MUSIC_ICON_SCALE);
 }

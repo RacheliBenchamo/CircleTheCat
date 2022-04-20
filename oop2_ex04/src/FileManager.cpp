@@ -44,9 +44,9 @@ void FileManager::loadAudio()
 // load the music sprites
 
 void FileManager::loadMusicIcon()
-{/*
+{
 	m_musicTexture[0].loadFromFile("musicOn.png");
-	m_musicTexture[1].loadFromFile("musicOff.png");*/
+	m_musicTexture[1].loadFromFile("musicOff.png");
 }
 
 //--------------------------------------------------

@@ -6,18 +6,16 @@ Board::Board()
 {
 	setBoard();
 }
- 
+//------------------------------------------------------
+
 //set the board
 void Board::setBoard()
 {
 	setGrid();
 	UpdatePaintedCircles();
-	//setColored()..for(i<m_maxColoredCircles)
-	// gril place
-	//m_grid[i][j].setFillColor(CLICKED_COLOR);
-	//m_grid[i][j].setOutlineColor(BASE_COLOR);
 	//setCat();
 }
+//------------------------------------------------------
 
 // draws the grid
 void Board::setGrid()
@@ -46,6 +44,7 @@ void Board::setGrid()
 	
 }
 //------------------------------------------------------
+
 void Board::SelectRandomColoredCircles()
 {
 	srand(time(NULL));
@@ -83,6 +82,8 @@ void Board::UpdatePaintedCircles()
 	}
 
 }
+//------------------------------------------------------
+
 void Board::ColoringCirclesToBeginningColor()
 {
 	for (int i = 0; i < BOARD_LEN; i++)
