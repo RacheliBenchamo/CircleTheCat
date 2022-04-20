@@ -28,9 +28,10 @@ private:
 	void setHeadlineText();
 	void setButtons();
 	void setMusicIcon();
-	void setButtonLiner();
 	void setRestartIcon();
 	void setUndoIcon();
+	void drawButtons(sf::RenderWindow& );
+
 
 	
 	int m_level;

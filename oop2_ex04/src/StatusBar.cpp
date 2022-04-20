@@ -48,11 +48,15 @@ void StatusBar::draw(sf::RenderWindow& window, const int numOfClicks, const bool
 	window.draw(this->m_headlineText);
 	window.draw(this->m_currClicksText);
 	window.draw(this->m_levelText);
-	window.draw(this->m_buttonLiner);
+	drawButtons(window);
+}
+//------------------------------------------
+
+void StatusBar::drawButtons(sf::RenderWindow& window)
+{
 	window.draw(this->m_musicIcon);
 	window.draw(this->m_undoIcon);
 	window.draw(this->m_resetIcon);
-
 }
 //------------------------------------------
 
@@ -110,7 +114,6 @@ void StatusBar::setLevelText()
 //--------------------------------------------
 void StatusBar::setButtons()
 {
-	setButtonLiner();
 	setMusicIcon();
 	setUndoIcon();
 	setRestartIcon();
@@ -137,16 +140,6 @@ void StatusBar::setUndoIcon()
 	this->m_undoIcon.setTexture(*FileManager::p2FileManager().getUndoIcon());
 	this->m_undoIcon.setPosition(UNDO_BUTTON_POS);
 	this->m_undoIcon.scale(BUTTONS_SCALE);
-}
-//--------------------------------------------
-
-void  StatusBar::setButtonLiner()
-{
-	//this->m_buttonLiner.setSize({ 230,60 });
-	//this->m_buttonLiner.setPosition(860, 35);
-	//this->m_buttonLiner.setOutlineColor(STATUS_BAR_COLOR);
-	//this->m_buttonLiner.setFillColor(sf::Color::Transparent);
-	//this->m_buttonLiner.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS+1);
 }
 //------------------------------------------
 
