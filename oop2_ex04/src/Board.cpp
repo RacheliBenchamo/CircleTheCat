@@ -12,7 +12,7 @@ Board::Board()
 void Board::setBoard()
 {
 	setGrid();
-	UpdatePaintedCircles();
+	setLevel();
 	//setCat();
 }
 //------------------------------------------------------
@@ -24,13 +24,12 @@ void Board::setGrid()
 	for (size_t i = 0; i < BOARD_LEN; i++)
 	{
 		std::vector<sf::CircleShape> currRow;
+
 		for (size_t j = 0; j < BOARD_LEN; j++)
 		{
 			sf::CircleShape circle(CIRCLE_RADIUS);
+
 			circle.setPosition(pos);
-			circle.setFillColor(BASE_COLOR);
-			circle.setOutlineColor(CLICKED_COLOR);
-			circle.setOutlineThickness(2);
 			currRow.push_back(circle);
 			pos.x += CIRCLE_DISTANCE;
 		}
@@ -40,8 +39,14 @@ void Board::setGrid()
 			pos.x = EVEN_DISTANCE;
 		else 
 			pos.x = ODD_DISTANCE;
-	}
-	
+	}	
+}
+//------------------------------------------------------
+
+void Board::setLevel()
+{
+	ColoringCirclesToBeginningColor();
+	UpdatePaintedCircles();
 }
 //------------------------------------------------------
 
@@ -49,22 +54,30 @@ void Board::SelectRandomColoredCircles()
 {
 	srand(time(NULL));
 	sf::Vector2f pos{ 0,0 };
-	int lowest = 1, highest = 10;
-	int range_row = (highest - lowest) + 1;
-	bool changh = true;
-
+	int range_row = BOARD_LEN;
+	std::cout << m_maxColoredCircles << "\n";
 	for (int i = 0; i < m_maxColoredCircles; i++)
 	{
-		do {
-			pos.x = lowest + rand() % range_row;
-			pos.y = lowest + rand() % range_row;
-		} while (pos.x == 6 && pos.y == 6);
+		do
+		{
+			pos.x =  rand() % range_row;
+			pos.y =  rand() % range_row;
+		} while (pos.x == 6 && pos.y == 6);//while its not in the cat place
 
-
-		RandomCircles.push_back(pos);
-		std::cout << pos.x <<" " << pos.y << " ";
+		m_randomColoredCircles.push_back(pos);
 	}
+}
+//------------------------------------------------------
 
+void Board::ColoringCirclesToBeginningColor()
+{
+	for (int i = 0; i < BOARD_LEN; i++)
+		for (int j = 0; j < BOARD_LEN; j++)
+		{
+			m_grid[i][j].setFillColor(BASE_COLOR);
+			m_grid[i][j].setOutlineColor(CLICKED_COLOR);
+			m_grid[i][j].setOutlineThickness(2);
+		}
 }
 //------------------------------------------------------
 
@@ -76,25 +89,7 @@ void Board::UpdatePaintedCircles()
 		m_restart = false;
 
 	for (int i = 0; i < m_maxColoredCircles; i++)
-	{
-		m_grid[RandomCircles[i].x][RandomCircles[i].y].setFillColor(CLICKED_COLOR);
-		m_grid[RandomCircles[i].x][RandomCircles[i].y].setOutlineColor(BASE_COLOR);
-	}
-
-}
-//------------------------------------------------------
-
-void Board::ColoringCirclesToBeginningColor()
-{
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		for (int j = 0; j < BOARD_LEN; j++)
-		{
-			m_grid[i][j].setFillColor(BASE_COLOR);
-			m_grid[i][j].setOutlineColor(CLICKED_COLOR);
-		}
-
-	}
+		coloringCurrentCircle(m_randomColoredCircles[i].x, m_randomColoredCircles[i].y);
 }
 //------------------------------------------------------
 
@@ -109,14 +104,9 @@ void Board::draw(sf::RenderWindow& window)const
 
 void Board::drawGrid(sf::RenderWindow& window)const
 {
-	int r = 1;
 	for (auto i : m_grid)
-	{
 		for (auto j : i)
-		{
 			window.draw(j);
-		}
-	}
 }
 //------------------------------------------------------
 
@@ -126,40 +116,38 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 	int x = event.mouseButton.x;
 	int y = event.mouseButton.y;
 
-	sf::Vector2f pos((float)(x ), (float)(y));
-
-	// Mouse click on circle
 	for (size_t i = 0; i < BOARD_LEN; i++)
 		for (size_t j = 0; j < BOARD_LEN; j++)
-		{
 			if (m_grid[i][j].getFillColor() == BASE_COLOR)
-			{
 				/* if mouse position is in circle range : pos.x < mouse.x < pos.x+radius and pos.y < mouse.y < pos.y+radius */
-				if (pos.x > m_grid[i][j].getPosition().x &&
-					pos.x < (m_grid[i][j].getPosition().x + (m_grid[i][j].getRadius() * 2)) &&
-					pos.y > m_grid[i][j].getPosition().y &&
-					pos.y < (m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2)))
+				if (x > m_grid[i][j].getPosition().x &&
+					x < (m_grid[i][j].getPosition().x + (m_grid[i][j].getRadius() * 2)) &&
+					y > m_grid[i][j].getPosition().y &&
+					y < (m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2)))
 				{
-					m_grid[i][j].setFillColor(CLICKED_COLOR);
-					m_grid[i][j].setOutlineColor(BASE_COLOR);
+					coloringCurrentCircle(i, j);
 					m_clickCount++;
 					/* do the cat move stuff*/
 				}
-			}
-		}
 }
 //------------------------------------------------------
 
 void Board::restartLevel()
 {
 	m_restart = true;
-	ColoringCirclesToBeginningColor();
-	UpdatePaintedCircles();
+	setLevel();
 }
 //------------------------------------------------------
 
 void Board::startNewLevel()
 {
-	m_maxColoredCircles - 2;
-	setBoard();
+	m_maxColoredCircles -= 2;
+	setLevel();
+}
+//------------------------------------------------------
+
+void Board::coloringCurrentCircle(int x, int y)
+{
+	m_grid[x][y].setFillColor(CLICKED_COLOR);
+	m_grid[x][y].setOutlineColor(BASE_COLOR);
 }

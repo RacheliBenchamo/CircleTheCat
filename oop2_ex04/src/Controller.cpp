@@ -75,10 +75,7 @@ void Controller::handelMouseButtonReleased(sf::Event event)
 	if (m_statusBar.containsMusicIcon(event))
 		handelMusicButtonReleased();
 
-	/*else if (m_statusBar.containsStopAndPlayIcon(event))
-		handelStopPlayButtonReleased();
-
-	else if (m_statusBar.containsRestartIcon(event))
+	/*else if (m_statusBar.containsRestartIcon(event))
 		resetLevel();*/
 	else
 		m_board.mouseButtonReleased(event, m_window);
