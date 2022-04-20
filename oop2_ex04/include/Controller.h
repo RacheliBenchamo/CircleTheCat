@@ -18,14 +18,11 @@ private:
 	void handelMouseButtonReleased(sf::Event);
 	void handelMusicButtonReleased();
 	void endGame();
+
 	sf::RenderWindow m_window;
 	sf::Sound m_backGroundMusic;
 	sf::RectangleShape m_background;
 	Board m_board;
 	StatusBar m_statusBar;
-
 	bool m_playButton;
-	bool m_existFile = true;
-	bool m_out = false;
-
 };

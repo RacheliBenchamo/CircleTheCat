@@ -37,7 +37,6 @@ private:
 	void coloringCurrentCircle(int, int);
 	void drawGrid(sf::RenderWindow& window)const;
 
-
 	int m_maxColoredCircles = 14;
 	bool m_winLevel = false;
 	bool m_loseLevel = false;

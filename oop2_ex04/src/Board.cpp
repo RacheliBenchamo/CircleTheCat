@@ -116,7 +116,7 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 				{
 					coloringCurrentCircle(i, j);
 					m_clickCount++;
-					m_clikedCircles.push_back(sf::Vector2f(i,j));
+					m_clikedCircles.push_back({ i,j });
 					/* do the cat move stuff*/
 				}
 }
