@@ -125,6 +125,7 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 void Board::restartLevel()
 {
 	m_restart = true;
+	m_clickCount = 0;
 	setLevel();
 }
 //------------------------------------------------------

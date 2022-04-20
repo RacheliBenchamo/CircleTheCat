@@ -39,7 +39,7 @@ const float BASE_SPEED = 100.;
 
 // for the status bar
 const int STATUS_BAR_HEIGHT = 200;
-const int STATUS_BAR_CHAR_SIZE = 60;
+const int STATUS_BAR_CHAR_SIZE = 45;
 const float STATUS_BAR_OUTLINE_THICKNESS = 3.0;
 const int BUFF_DISTANCE = 60;
 const sf::Vector2f MUSIC_ICON_SCALE = { 0.08f, 0.08f };

@@ -75,8 +75,10 @@ void Controller::handelMouseButtonReleased(sf::Event event)
 	if (m_statusBar.containsMusicIcon(event))
 		handelMusicButtonReleased();
 
-	/*else if (m_statusBar.containsRestartIcon(event))
-		resetLevel();*/
+	else if (m_statusBar.containsRestartIcon(event))
+		m_board.restartLevel();
+	else if (m_statusBar.containsUndoIcon(event))
+		m_board.undo();
 	else
 		m_board.mouseButtonReleased(event, m_window);
 }

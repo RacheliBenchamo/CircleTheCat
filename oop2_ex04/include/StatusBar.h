@@ -17,7 +17,10 @@ public:
 	void draw(sf::RenderWindow&, const int, const bool);
 	void resetNumOfLevel();
 	bool containsMusicIcon(const sf::Event&) const;
+	bool containsRestartIcon(const sf::Event&) const;
+	bool containsUndoIcon(const sf::Event&) const;
 	void setMusicIcon(const bool);
+
 
 private:
 	void setCurrClicksText();

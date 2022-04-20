@@ -12,6 +12,8 @@ FileManager::FileManager()
 	loadAudio();
 	loadMusicIcon();
 	loadBackgrounds();
+	loadResetIcon();
+	loadUndoIcon();
 }
 //--------------------------------------------------
 //return unic pointer to the object
