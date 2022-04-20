@@ -88,7 +88,6 @@ void Controller::handelMouseButtonReleased(sf::Event event)
 
 void Controller::handelMusicButtonReleased()
 {
-	m_board.undo();
 	if (m_backGroundMusic.getStatus() == sf::SoundSource::Status::Playing)
 	{
 		m_backGroundMusic.stop();

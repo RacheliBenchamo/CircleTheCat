@@ -26,6 +26,7 @@ private:
 
 	void loadFromFileIcons();
 	void loadAudio();
+	void loadButtons();
 	void loadMusicIcon();
 	void loadResetIcon();
 	void loadUndoIcon();

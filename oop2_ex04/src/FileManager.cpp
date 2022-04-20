@@ -10,10 +10,8 @@ FileManager::FileManager()
 	//loads from all the files:
 	loadFromFileIcons();
 	loadAudio();
-	loadMusicIcon();
 	loadBackgrounds();
-	loadResetIcon();
-	loadUndoIcon();
+	loadButtons();
 }
 //--------------------------------------------------
 //return unic pointer to the object
@@ -41,6 +39,15 @@ void FileManager::loadAudio()
 	m_audio[S_WIN_GAME].loadFromFile("winGameSound.wav");*/
 	m_audio[S_BACKROUND].loadFromFile("backgroundMusic.wav");
 
+}
+//--------------------------------------------------
+// load all the buttons
+
+void  FileManager::loadButtons()
+{
+	loadMusicIcon();
+	loadResetIcon();
+	loadUndoIcon();
 }
 //--------------------------------------------------
 // load the music sprites

@@ -26,6 +26,7 @@ private:
 	void setCurrClicksText();
 	void setLevelText();
 	void setHeadlineText();
+	void setButtons();
 	void setMusicIcon();
 	void setButtonLiner();
 	void setRestartIcon();

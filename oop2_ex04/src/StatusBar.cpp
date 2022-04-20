@@ -13,10 +13,7 @@ StatusBar::StatusBar() : m_level(0)
 	setHeadlineText();
 	setCurrClicksText();
 	setLevelText();
-	setButtonLiner();
-	setMusicIcon();
-	setUndoIcon();
-	setRestartIcon();
+	setButtons();
 }
 //------------------------------------------
 
@@ -111,7 +108,14 @@ void StatusBar::setLevelText()
 	this->m_levelText.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS);
 }
 //--------------------------------------------
-
+void StatusBar::setButtons()
+{
+	setButtonLiner();
+	setMusicIcon();
+	setUndoIcon();
+	setRestartIcon();
+}
+//--------------------------------------------
 void StatusBar::setMusicIcon()
 {
 	this->m_musicIcon.setTexture(*FileManager::p2FileManager().getMusicIcon(true));
