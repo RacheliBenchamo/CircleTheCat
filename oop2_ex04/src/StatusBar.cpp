@@ -79,8 +79,8 @@ void StatusBar::setHeadlineText()
 {
 	this->m_headlineText.setFont(*FileManager::p2FileManager().getFont());
 	this->m_headlineText.setCharacterSize(90);
-	this->m_headlineText.setPosition(200, 10);
-	this->m_headlineText.setColor(sf::Color(153, 153, 255, 255));
+	this->m_headlineText.setPosition(HEADLINE_POS);
+	this->m_headlineText.setColor(STATUS_BAR_COLOR);
 	this->m_headlineText.setOutlineColor(sf::Color::White);
 	this->m_headlineText.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS);
 	this->m_headlineText.setString("Circle The Cat");
@@ -91,8 +91,8 @@ void StatusBar::setCurrClicksText()
 {
 	this->m_currClicksText.setFont(*FileManager::p2FileManager().getFont());
 	this->m_currClicksText.setCharacterSize(STATUS_BAR_CHAR_SIZE);
-	this->m_currClicksText.setPosition(900, 600);
-	this->m_currClicksText.setColor(sf::Color(153, 153, 255, 255));
+	this->m_currClicksText.setPosition(CURR_CLICKS_POS);
+	this->m_currClicksText.setColor(STATUS_BAR_COLOR);
 	this->m_currClicksText.setOutlineColor(sf::Color(230, 230, 255, 255));
 	this->m_currClicksText.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS);
 }
@@ -102,8 +102,8 @@ void StatusBar::setLevelText()
 {
 	this->m_levelText.setFont(*FileManager::p2FileManager().getFont());
 	this->m_levelText.setCharacterSize(STATUS_BAR_CHAR_SIZE);
-	this->m_levelText.setPosition(900, 200);
-	this->m_levelText.setColor(sf::Color(153, 153, 255, 255));
+	this->m_levelText.setPosition(LEVEL_POS);
+	this->m_levelText.setColor(STATUS_BAR_COLOR);
 	this->m_levelText.setOutlineColor(sf::Color(230, 230, 255, 255));
 	this->m_levelText.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS);
 }
@@ -119,24 +119,24 @@ void StatusBar::setButtons()
 void StatusBar::setMusicIcon()
 {
 	this->m_musicIcon.setTexture(*FileManager::p2FileManager().getMusicIcon(true));
-	this->m_musicIcon.setPosition(955,  300);
-	this->m_musicIcon.scale(MUSIC_ICON_SCALE);
+	this->m_musicIcon.setPosition(MUSIC_BUTTON_POS);
+	this->m_musicIcon.scale(BUTTONS_SCALE);
 }
 //--------------------------------------------
 
 void StatusBar::setRestartIcon()
 {
 	this->m_resetIcon.setTexture(*FileManager::p2FileManager().getRestartIcon());
-	this->m_resetIcon.setPosition(955, 500);
-	this->m_resetIcon.scale(MUSIC_ICON_SCALE);
+	this->m_resetIcon.setPosition(RESET_BUTTON_POS);
+	this->m_resetIcon.scale(BUTTONS_SCALE);
 }
 //--------------------------------------------
 
 void StatusBar::setUndoIcon()
 {
 	this->m_undoIcon.setTexture(*FileManager::p2FileManager().getUndoIcon());
-	this->m_undoIcon.setPosition(955, 400);
-	this->m_undoIcon.scale(MUSIC_ICON_SCALE);
+	this->m_undoIcon.setPosition(UNDO_BUTTON_POS);
+	this->m_undoIcon.scale(BUTTONS_SCALE);
 }
 //--------------------------------------------
 
@@ -144,9 +144,9 @@ void  StatusBar::setButtonLiner()
 {
 	this->m_buttonLiner.setSize({ 60,260 });
 	this->m_buttonLiner.setPosition(950, 290);
-	this->m_buttonLiner.setOutlineColor(sf::Color(153, 153, 255, 255));
+	this->m_buttonLiner.setOutlineColor(STATUS_BAR_COLOR);
 	this->m_buttonLiner.setFillColor(sf::Color::Transparent);
-	this->m_buttonLiner.setOutlineThickness(4);
+	this->m_buttonLiner.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS+1);
 }
 //------------------------------------------
 
