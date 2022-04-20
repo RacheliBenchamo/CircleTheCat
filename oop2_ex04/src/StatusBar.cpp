@@ -13,6 +13,7 @@ StatusBar::StatusBar() : m_level(0)
 	setHeadlineText();
 	setCurrClicksText();
 	setLevelText();
+	setButtonLiner();
 	setMusicIcon();
 }
 //------------------------------------------
@@ -48,6 +49,7 @@ void StatusBar::draw(sf::RenderWindow& window, const int numOfClicks, const bool
 	window.draw(this->m_headlineText);
 	window.draw(this->m_currClicksText);
 	window.draw(this->m_levelText);
+	window.draw(this->m_buttonLiner);
 	window.draw(this->m_musicIcon);
 }
 //------------------------------------------
@@ -109,6 +111,16 @@ void StatusBar::setLevelText()
 void StatusBar::setMusicIcon()
 {
 	this->m_musicIcon.setTexture(*FileManager::p2FileManager().getMusicIcon(true));
-	this->m_musicIcon.setPosition(350,  BUFF_DISTANCE+15);
+	this->m_musicIcon.setPosition(955,  200);
 	this->m_musicIcon.scale(MUSIC_ICON_SCALE);
+}
+//--------------------------------------------
+
+void  StatusBar::setButtonLiner()
+{
+	this->m_buttonLiner.setSize({ 60,500 });
+	this->m_buttonLiner.setPosition(950, 150);
+	this->m_buttonLiner.setOutlineColor(sf::Color(153, 153, 255, 255));
+	this->m_buttonLiner.setFillColor(sf::Color::Transparent);
+	this->m_buttonLiner.setOutlineThickness(4);
 }

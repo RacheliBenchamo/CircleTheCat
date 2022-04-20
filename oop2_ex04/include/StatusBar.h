@@ -24,8 +24,11 @@ private:
 	void setLevelText();
 	void setHeadlineText();
 	void setMusicIcon();
+	void setButtonLiner();
+
 	
 	int m_level;
+	sf::RectangleShape m_buttonLiner;
 	sf::Text m_currClicksText;
 	sf::Text m_headlineText;
 	sf::Text m_levelText;
