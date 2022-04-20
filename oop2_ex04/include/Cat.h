@@ -15,7 +15,7 @@ class Cat :
 public:
 	bool ReachedTheExit() { return m_reachedTheExit; };
 	void resetReachedTheExit() { m_reachedTheExit = false; };
-	void move() {};
+	void move(std::vector<std::vector<sf::CircleShape>>) {};
 	void draw() {};
 	void setPos(sf::Vector2f pos) { m_sprite.setPosition(pos)};
 	sf::Vector2f getPos() {return m_sprite.getPosition()};

@@ -7,8 +7,8 @@ Board::Board()
 	setBoard();
 }
 //------------------------------------------------------
-
 //set the board
+
 void Board::setBoard()
 {
 	setGrid();
@@ -16,8 +16,8 @@ void Board::setBoard()
 	//setCat();
 }
 //------------------------------------------------------
-
 // draws the grid
+
 void Board::setGrid()
 {
 	sf::Vector2f pos = { ODD_DISTANCE, 150 };
@@ -43,6 +43,7 @@ void Board::setGrid()
 	}	
 }
 //------------------------------------------------------
+//set level
 
 void Board::setLevel()
 {
@@ -116,7 +117,7 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 				{
 					coloringCurrentCircle(i, j);
 					m_clickCount++;
-					m_clikedCircles.push_back({ i,j });
+					m_clikedCircles.push_back(sf::Vector2f( i,j ));
 					/* do the cat move stuff*/
 				}
 }
