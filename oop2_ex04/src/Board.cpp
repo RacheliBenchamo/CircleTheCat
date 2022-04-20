@@ -11,6 +11,7 @@ Board::Board()
 void Board::setBoard()
 {
 	setGrid();
+	UpdatePaintedCircles();
 	//setColored()..for(i<m_maxColoredCircles)
 	// gril place
 	//m_grid[i][j].setFillColor(CLICKED_COLOR);
@@ -44,6 +45,58 @@ void Board::setGrid()
 	}
 	
 }
+//------------------------------------------------------
+void Board::SelectRandomColoredCircles()
+{
+	srand(time(NULL));
+	sf::Vector2f pos{ 0,0 };
+	int lowest = 1, highest = 10;
+	int range_row = (highest - lowest) + 1;
+	bool changh = true;
+
+	for (int i = 0; i < m_maxColoredCircles; i++)
+	{
+		do {
+			pos.x = lowest + rand() % range_row;
+			pos.y = lowest + rand() % range_row;
+		} while (pos.x == 6 && pos.y == 6);
+
+
+		RandomCircles.push_back(pos);
+		std::cout << pos.x <<" " << pos.y << " ";
+	}
+
+}
+//------------------------------------------------------
+
+void Board::UpdatePaintedCircles()
+{
+	if (!m_restart)
+		SelectRandomColoredCircles();
+	else
+		m_restart = false;
+
+	for (int i = 0; i < m_maxColoredCircles; i++)
+	{
+		m_grid[RandomCircles[i].x][RandomCircles[i].y].setFillColor(CLICKED_COLOR);
+		m_grid[RandomCircles[i].x][RandomCircles[i].y].setOutlineColor(BASE_COLOR);
+	}
+
+}
+void Board::ColoringCirclesToBeginningColor()
+{
+	for (int i = 0; i < BOARD_LEN; i++)
+	{
+		for (int j = 0; j < BOARD_LEN; j++)
+		{
+			m_grid[i][j].setFillColor(BASE_COLOR);
+			m_grid[i][j].setOutlineColor(CLICKED_COLOR);
+		}
+
+	}
+}
+//------------------------------------------------------
+
 // draw all the relevent objects 
 void Board::draw(sf::RenderWindow& window)const
 {
@@ -51,6 +104,7 @@ void Board::draw(sf::RenderWindow& window)const
 	//window.draw(m_cat);
 	//window.draw(m_movingCircle);
 }
+//------------------------------------------------------
 
 void Board::drawGrid(sf::RenderWindow& window)const
 {
@@ -63,6 +117,7 @@ void Board::drawGrid(sf::RenderWindow& window)const
 		}
 	}
 }
+//------------------------------------------------------
 
 // in case the user clicked on the mouse
 void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
@@ -92,19 +147,18 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 			}
 		}
 }
+//------------------------------------------------------
 
 void Board::restartLevel()
 {
-	//setboard
-    //fill color
+	m_restart = true;
+	ColoringCirclesToBeginningColor();
+	UpdatePaintedCircles();
 }
+//------------------------------------------------------
+
 void Board::startNewLevel()
 {
-	//setboard
-	//maxcircl-2;
-	//gril colored circle and check that its not in 6 6
-	//fill color
+	m_maxColoredCircles - 2;
+	setBoard();
 }
-//fill color{
-//m_grid[vector.i.x][vector.i.y].setFillColor(CLICKED_COLOR);
-//m_grid[i][j].setOutlineColor(BASE_COLOR);

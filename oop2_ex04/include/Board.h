@@ -29,14 +29,20 @@ public:
 private:
 	void setBoard();
 	void setGrid();
+	void SelectRandomColoredCircles();
+	void UpdatePaintedCircles();
+	void ColoringCirclesToBeginningColor();
+
 	void drawGrid(sf::RenderWindow& window)const;
 
 	int m_maxColoredCircles = 14;
 	bool m_winLevel = false;
 	bool m_loseLevel = false;
+	bool m_restart = false;
 	int m_clickCount = 0;
 	//std::vector<std::vector<sf::Vector2f>> m_levels;
 	std::vector<std::vector<sf::CircleShape>> m_grid;
+	std::vector<sf::Vector2f> RandomCircles;
 	//sf::CircleShape m_movingCircle;
 	
 };
