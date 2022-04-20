@@ -15,6 +15,8 @@ StatusBar::StatusBar() : m_level(0)
 	setLevelText();
 	setButtonLiner();
 	setMusicIcon();
+	setUndoIcon();
+	setRestartIcon();
 }
 //------------------------------------------
 
@@ -51,6 +53,9 @@ void StatusBar::draw(sf::RenderWindow& window, const int numOfClicks, const bool
 	window.draw(this->m_levelText);
 	window.draw(this->m_buttonLiner);
 	window.draw(this->m_musicIcon);
+	window.draw(this->m_undoIcon);
+	window.draw(this->m_resetIcon);
+
 }
 //------------------------------------------
 
@@ -113,6 +118,22 @@ void StatusBar::setMusicIcon()
 	this->m_musicIcon.setTexture(*FileManager::p2FileManager().getMusicIcon(true));
 	this->m_musicIcon.setPosition(955,  200);
 	this->m_musicIcon.scale(MUSIC_ICON_SCALE);
+}
+//--------------------------------------------
+
+void StatusBar::setRestartIcon()
+{
+	this->m_resetIcon.setTexture(*FileManager::p2FileManager().getRestartIcon());
+	this->m_resetIcon.setPosition(955, 300);
+	this->m_resetIcon.scale(MUSIC_ICON_SCALE);
+}
+//--------------------------------------------
+
+void StatusBar::setUndoIcon()
+{
+	this->m_undoIcon.setTexture(*FileManager::p2FileManager().getUndoIcon());
+	this->m_undoIcon.setPosition(955, 400);
+	this->m_undoIcon.scale(MUSIC_ICON_SCALE);
 }
 //--------------------------------------------
 

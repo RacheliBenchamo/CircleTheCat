@@ -48,7 +48,20 @@ void FileManager::loadMusicIcon()
 	m_musicTexture[0].loadFromFile("musicOn.png");
 	m_musicTexture[1].loadFromFile("musicOff.png");
 }
+//--------------------------------------------------
+// load the restart sprite
 
+void FileManager::loadResetIcon()
+{
+	m_restartIcon.loadFromFile("resetButton.png");
+}
+//--------------------------------------------------
+// load the undo sprite
+
+void FileManager::loadUndoIcon()
+{
+	m_undoIcon.loadFromFile("undoButton.png");
+}
 //--------------------------------------------------
 // load the backgrounds sprites
 
@@ -73,6 +86,18 @@ const sf::Texture* FileManager::getMusicIcon(bool musicOn)const
 		return &this->m_musicTexture[0];
 	else
 		return &this->m_musicTexture[1];
+}
+//--------------------------------------------------
+
+const sf::Texture* FileManager::getRestartIcon()const
+{
+	return &this->m_restartIcon;
+}
+//--------------------------------------------------
+
+const sf::Texture* FileManager::getUndoIcon()const
+{
+	return &this->m_undoIcon;
 }
 //--------------------------------------------------
 

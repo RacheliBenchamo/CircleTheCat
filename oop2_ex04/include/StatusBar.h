@@ -25,6 +25,8 @@ private:
 	void setHeadlineText();
 	void setMusicIcon();
 	void setButtonLiner();
+	void setRestartIcon();
+	void setUndoIcon();
 
 	
 	int m_level;
@@ -34,6 +36,8 @@ private:
 	sf::Text m_levelText;
 	sf::Font m_font;
 
+	sf::Sprite m_resetIcon;
+	sf::Sprite m_undoIcon;
 	sf::Sprite m_musicIcon;
 };
 
