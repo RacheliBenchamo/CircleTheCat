@@ -102,14 +102,6 @@ void Board::draw(sf::RenderWindow& window)const
 }
 //------------------------------------------------------
 
-void Board::drawGrid(sf::RenderWindow& window)const
-{
-	for (auto i : m_grid)
-		for (auto j : i)
-			window.draw(j);
-}
-//------------------------------------------------------
-
 // in case the user clicked on the mouse
 void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 {
@@ -150,4 +142,12 @@ void Board::coloringCurrentCircle(int x, int y)
 {
 	m_grid[x][y].setFillColor(CLICKED_COLOR);
 	m_grid[x][y].setOutlineColor(BASE_COLOR);
+}
+//------------------------------------------------------
+
+void Board::drawGrid(sf::RenderWindow& window)const
+{
+	for (auto i : m_grid)
+		for (auto j : i)
+			window.draw(j);
 }
