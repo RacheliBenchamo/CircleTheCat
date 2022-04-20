@@ -44,11 +44,11 @@ const int STATUS_BAR_CHAR_SIZE = 45;
 const float STATUS_BAR_OUTLINE_THICKNESS = 3.0;
 const int BUFF_DISTANCE = 60;
 const sf::Vector2f HEADLINE_POS = { 200, 10 };
-const sf::Vector2f CURR_CLICKS_POS = { 900, 600 };
+const sf::Vector2f CURR_CLICKS_POS = { 900, 300 };
 const sf::Vector2f LEVEL_POS = { 900, 200 };
-const sf::Vector2f MUSIC_BUTTON_POS = { 955,  300 };
-const sf::Vector2f RESET_BUTTON_POS = { 955, 500 };
-const sf::Vector2f UNDO_BUTTON_POS = { 955, 400 };
+const sf::Vector2f MUSIC_BUTTON_POS = { 870,  40 };
+const sf::Vector2f RESET_BUTTON_POS = { 1030, 40 };
+const sf::Vector2f UNDO_BUTTON_POS = { 950, 40 };
 
 
 const sf::Vector2f BUTTONS_SCALE = { 0.08f, 0.08f };

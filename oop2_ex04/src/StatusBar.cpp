@@ -142,11 +142,11 @@ void StatusBar::setUndoIcon()
 
 void  StatusBar::setButtonLiner()
 {
-	this->m_buttonLiner.setSize({ 60,260 });
-	this->m_buttonLiner.setPosition(950, 290);
-	this->m_buttonLiner.setOutlineColor(STATUS_BAR_COLOR);
-	this->m_buttonLiner.setFillColor(sf::Color::Transparent);
-	this->m_buttonLiner.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS+1);
+	//this->m_buttonLiner.setSize({ 230,60 });
+	//this->m_buttonLiner.setPosition(860, 35);
+	//this->m_buttonLiner.setOutlineColor(STATUS_BAR_COLOR);
+	//this->m_buttonLiner.setFillColor(sf::Color::Transparent);
+	//this->m_buttonLiner.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS+1);
 }
 //------------------------------------------
 
