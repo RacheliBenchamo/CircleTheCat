@@ -5,7 +5,7 @@ using std::cout;
 Controller::Controller()
 	:m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
 		"Circle The Cat!", sf::Style::Titlebar | sf::Style::Close)
-	//, m_playButton(true)
+	, m_playButton(true)
 {
 	m_window.setFramerateLimit(15);
 
@@ -13,8 +13,9 @@ Controller::Controller()
 	m_background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT + STATUS_BAR_HEIGHT });
 	m_background.setTexture(FileManager::p2FileManager().getBackGround(GAME_BACKGROUND));
 }
-
+//-----------------------------------------------------------------
 //run
+
 void Controller::run()
 {
 	int levCount = 0;
@@ -39,7 +40,7 @@ void Controller::run()
 		{
 			if (levCount < NUM_OF_LEVELS)
 			{
-				//win msg
+				//win level msg
 				m_board.startNewLevel();
 				levCount++;
 			}
@@ -51,9 +52,9 @@ void Controller::run()
 			m_board.restartLevel();
 	}
 }
-
 //-----------------------------------------------------------------
 //check event
+
 void Controller::CheckOutWhatEvent( sf::Event event)
 {
 	switch (event.type)
@@ -66,7 +67,6 @@ void Controller::CheckOutWhatEvent( sf::Event event)
 		break;
 	}
 }
-
 //----------------------------------------------
 //handle the event that occurred when the MouseButtonReleased
 
@@ -74,7 +74,6 @@ void Controller::handelMouseButtonReleased(sf::Event event)
 {
 	if (m_statusBar.containsMusicIcon(event))
 		handelMusicButtonReleased();
-
 	else if (m_statusBar.containsRestartIcon(event))
 		m_board.restartLevel();
 	else if (m_statusBar.containsUndoIcon(event))
@@ -82,7 +81,6 @@ void Controller::handelMouseButtonReleased(sf::Event event)
 	else
 		m_board.mouseButtonReleased(event, m_window);
 }
-
 //----------------------------------------------
 //stopping or playing background music
 
@@ -100,8 +98,10 @@ void Controller::handelMusicButtonReleased()
 	}
 }
 //----------------------------------------------
+//show win game msg and close the game
 
 void Controller::endGame()
 {
-
+	//end msg
+	m_window.close();
 }
