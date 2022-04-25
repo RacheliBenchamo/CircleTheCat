@@ -49,7 +49,8 @@ const sf::Vector2f LEVEL_POS = { 900, 200 };
 const sf::Vector2f MUSIC_BUTTON_POS = { 870,  40 };
 const sf::Vector2f RESET_BUTTON_POS = { 1030, 40 };
 const sf::Vector2f UNDO_BUTTON_POS = { 950, 40 };
-
+const int HALF_BOARD_DIS = (BOARD_LEN / 2) * CIRCLE_DISTANCE;
+const sf::Vector2f CAT_START_POS= { EVEN_DISTANCE+ HALF_BOARD_DIS, 150+ HALF_BOARD_DIS };
 
 const sf::Vector2f BUTTONS_SCALE = { 0.08f, 0.08f };
 

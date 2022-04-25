@@ -6,15 +6,20 @@
 
 #include <limits.h>
 #include <stdio.h>
-
+Cat::Cat()
+{
+	auto m_pTexture = FileManager::p2FileManager().getCatTexture();
+	m_sprite.setTexture(*m_pTexture);
+	m_sprite.scale(BUTTONS_SCALE);
+}
 //---------------------------------------------------
 //
 void Cat::move(std::vector<std::vector<sf::CircleShape>> grid)
 {
-	if (canMove())
-	{
-		//(grid, m_sprite.)
-    }
+	//if (canMove())
+	//{
+	//	//(grid, m_sprite.)
+ //   }
 }
 
 //canMove()
@@ -24,36 +29,21 @@ void Cat::move(std::vector<std::vector<sf::CircleShape>> grid)
 
 
 // C++ Code implementation for above problem
-#include <bits/stdc++.h>
+#include <deque>  
+#include <queue> 
 using namespace std;
 
-#define N 11
-#define M 11
-
-// QItem for current location and distance
-// from source location
-class QItem {
-public:
-	int row;
-	int col;
-	int dist;
-	QItem(int x, int y, int w)
-		: row(x), col(y), dist(w)
-	{
-	}
-};
-
-int minDistance(std::vector<std::vector<sf::CircleShape>> grid)
+std::vector<sf::Vector2<int>> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid)
 {
-	QItem source(0, 0, 0);
-
+	//QItem source(0, 0, 0);
+	sf::Vector2<int> source(0, 0);
 	// To keep track of visited QItems. Marking
 	// blocked cells as visited.
-	bool visited[N][M];
+	bool visited[BOARD_LEN][BOARD_LEN];
 
-	for (int i = 0; i < N; i++)
+	for (int i = 0; i < BOARD_LEN; i++)
 	{
-		for (int j = 0; j < M; j++)
+		for (int j = 0; j < BOARD_LEN; j++)
 		{
 			if (grid[i][j].getFillColor() == CLICKED_COLOR)//cant pass them
 				visited[i][j] = true;
@@ -63,80 +53,77 @@ int minDistance(std::vector<std::vector<sf::CircleShape>> grid)
 			// Finding the place tha cat standing on
 			if (grid[i][j].getPosition() == this->m_sprite.getPosition())
 			{
-				source.row = i;
-				source.col = j;
+				source.x=i;
+				source.y = j;
 			}
 		}
 	}
 
 	// applying BFS on matrix cells starting from source
-	queue<QItem> q;
+	std::vector<sf::Vector2<int>> way;
+	std::queue<sf::Vector2<int>> q;
 	q.push(source);
-	visited[source.row][source.col] = true;
+
+	visited[source.x][source.y] = true;
+
 	while (!q.empty()) 
 	{
-		QItem p = q.front();
+		sf::Vector2<int> p = q.front();
 		q.pop();
 
 		// Destination found;
-		if (p.row==0|| p.row == 10||p.col == 0|| p.col==10)
-			return p.dist;
+		if (p.x==0|| p.x == 10||p.y == 0|| p.y==10)
+			return way;
 
 		// moving up left
-		if (p.row - 1 >= 0 &&
-			visited[p.row - 1][p.col-1] == false) 
+		if (p.x - 1 >= 0 && visited[p.x - 1][p.y-1] == false) 
 		{
-			q.push(QItem(p.row - 1, p.col-1, p.dist + 1));
-			visited[p.row - 1][p.col-1] = true;
+			q.push(sf::Vector2<int>(p.x - 1, p.y - 1));
+			way.push_back(sf::Vector2<int>(p.x - 1, p.y - 1));
+			visited[p.x - 1][p.y-1] = true;
 		}
 
 		// moving up right
-		if (p.row - 1 >= 0 &&
-			visited[p.row - 1][p.col + 1] == false) 
+		if (p.x - 1 >= 0 && visited[p.x - 1][p.y + 1] == false) 
 		{
-			q.push(QItem(p.row - 1, p.col + 1, p.dist + 1));
-			visited[p.row - 1][p.col+1] = true;
+			q.push(sf::Vector2<int>(p.x - 1, p.y + 1));
+			way.push_back(sf::Vector2<int>(p.x - 1, p.y + 1));
+			visited[p.x - 1][p.y+1] = true;
 		}
 
 		// moving down left 
-		if (p.row + 1 < N &&
-			visited[p.row + 1][p.col-1] == false) {
-			q.push(QItem(p.row + 1, p.col-1, p.dist + 1));
-			visited[p.row + 1][p.col-1] = true;
+		if (p.x + 1 < BOARD_LEN && visited[p.x + 1][p.y-1] == false)
+		{
+			q.push(sf::Vector2<int>(p.x + 1, p.y - 1));
+			way.push_back(sf::Vector2<int>(p.x + 1, p.y - 1));
+			visited[p.x + 1][p.y-1] = true;
 		}
 
 		// moving down right
-		if (p.row + 1 < N &&
-			visited[p.row + 1][p.col+1] == false) {
-			q.push(QItem(p.row + 1, p.col+1, p.dist + 1));
-			visited[p.row + 1][p.col+1] = true;
+		if (p.x + 1 < BOARD_LEN && visited[p.x + 1][p.y+1] == false)
+		{
+			q.push(sf::Vector2<int>(p.x+1, p.y + 1));
+			way.push_back(sf::Vector2<int>(p.x + 1, p.y + 1));
+			visited[p.x + 1][p.y+1] = true;
 		}
 
 		// moving left
-		if (p.col - 1 >= 0 &&
-			visited[p.row][p.col - 1] == false) {
-			q.push(QItem(p.row, p.col - 1, p.dist + 1));
-			visited[p.row][p.col - 1] = true;
+		if (p.y - 1 >= 0 && visited[p.x][p.y - 1] == false) 
+		{
+			q.push(sf::Vector2<int>(p.x, p.y + 1));
+			way.push_back(sf::Vector2<int>(p.x, p.y - 1));
+			visited[p.x][p.y - 1] = true;
 		}
 
 		// moving right
-		if (p.col + 1 < M &&
-			visited[p.row][p.col + 1] == false) {
-			q.push(QItem(p.row, p.col + 1, p.dist + 1));
-			visited[p.row][p.col + 1] = true;
+		if (p.x + 1 < BOARD_LEN && visited[p.x][p.y + 1] == false) 
+		{
+			q.push(sf::Vector2<int>(p.x, p.y + 1));
+			way.push_back(sf::Vector2<int>(p.x, p.y + 1));
+			visited[p.x][p.y + 1] = true;
 		}
 	}
-	return -1;
+	//return -1;
 }
 
-// Driver code
-int main()
-{
-	char grid[N][M] = { { '0', '*', '0', 's' },
-						{ '*', '0', '*', '*' },
-						{ '0', '*', '*', '*' },
-						{ 'd', '*', '*', '*' } };
 
-	cout << minDistance(grid);
-	return 0;
-}

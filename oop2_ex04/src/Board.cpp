@@ -13,7 +13,13 @@ void Board::setBoard()
 {
 	setGrid();
 	setLevel();
-	//setCat();
+	setCat();
+}
+//------------------------------------------------------
+
+void Board::setCat()
+{
+	m_cat.setPos(CAT_START_POS);
 }
 //------------------------------------------------------
 // draws the grid
@@ -95,6 +101,7 @@ void Board::UpdatePaintedCircles()
 void Board::draw(sf::RenderWindow& window)const
 {
 	drawGrid(window);
+	m_cat.draw(window);
 	//window.draw(m_cat);
 	//window.draw(m_movingCircle);
 }
@@ -116,9 +123,11 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 					y < (m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2)))
 				{
 					coloringCurrentCircle(i, j);
+					m_cat.move(m_grid);
 					m_clickCount++;
+
 					m_clikedCircles.push_back(sf::Vector2f( i,j ));
-					/* do the cat move stuff*/
+					m_catWay.push_back(m_cat.getPos());
 				}
 }
 //------------------------------------------------------
@@ -135,6 +144,7 @@ void Board::startNewLevel()
 {
 	m_maxColoredCircles -= 2;
 	setLevel();
+	setCat();
 }
 //------------------------------------------------------
 
@@ -142,9 +152,9 @@ void Board::undo()
 {
 	if (m_clickCount > 0)
 	{
+		takeCatBackToPrevPos();
 		sf::Vector2f pos = m_clikedCircles[m_clikedCircles.size()-1];
 		m_clikedCircles.pop_back();
-		//m_cat.takeBackToNextPos();
 		m_clickCount--;
 		unColoringCurrentCircle(pos.x, pos.y);
 	}
@@ -170,4 +180,11 @@ void Board::drawGrid(sf::RenderWindow& window)const
 	for (auto i : m_grid)
 		for (auto j : i)
 			window.draw(j);
+}
+//------------------------------------------------------
+
+void Board::takeCatBackToPrevPos()
+{
+	m_catWay.pop_back();
+	m_cat.setPos(m_catWay[m_catWay.size() - 1]);
 }

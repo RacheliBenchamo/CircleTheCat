@@ -11,7 +11,7 @@ public:
 	~FileManager() {};
 	static FileManager& p2FileManager();
 
-	//const sf::Texture* getCatTexture()const;
+	const sf::Texture* getCatTexture()const;
 	const sf::SoundBuffer* getSound(sounds)const;
 	const sf::Texture* getMusicIcon(bool)const;
 	const sf::Texture* getRestartIcon()const;
@@ -36,6 +36,7 @@ private:
 	sf::Texture m_backgrounds[NUM_OF_BACKGROUNDS];
 	sf::Texture m_musicTexture[2];
 	sf::Texture m_restartIcon;
+	sf::Texture m_catIcon;
 	sf::Texture m_undoIcon;
 	sf::SoundBuffer m_audio[NUM_OF_SOUNDS];
 	sf::Font m_font;

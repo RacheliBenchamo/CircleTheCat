@@ -25,7 +25,7 @@ FileManager& FileManager::p2FileManager()
 
 void FileManager::loadFromFileIcons()
 {
-	//m_icons[GIFT].loadFromFile("Gift.png");
+	m_catIcon.loadFromFile("Cat.png");
 
 	this->m_font.loadFromFile("Seagram tfb.ttf");
 }
@@ -83,6 +83,11 @@ void FileManager::loadBackgrounds()
 }
 //--------------------------------------------
 
+const sf::Texture* FileManager::getCatTexture()const
+{
+	return &this->m_catIcon;
+}
+//--------------------------------------------
 const sf::SoundBuffer* FileManager::getSound(sounds sound)const
 {
 	return &this->m_audio[(int)sound];
@@ -114,12 +119,6 @@ const sf::Texture* FileManager::getBackGround(backgroundsType place)const
 {
 	return &this->m_backgrounds[place];
 }
-////--------------------------------------------------
-//
-//const sf::Texture* FileManager::getCatTexture()const
-//{
-//	//return &this->m_icons[place];
-//}
 //--------------------------------------------------
 
 const sf::Font* FileManager::getFont()const
