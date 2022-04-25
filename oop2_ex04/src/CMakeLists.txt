@@ -3,4 +3,6 @@
                                             "Board.cpp"
                                             "FileManager.cpp"
                                             "StatusBar.cpp"
+                                         "Cat.cpp"
+
                                               )

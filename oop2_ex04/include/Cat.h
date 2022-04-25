@@ -4,8 +4,6 @@
 #include <SFML\Graphics.hpp>
 #include <vector>
 #include "Board.h"
-#include "MovingInclude\Player.h"
-#include "GameObjBase.h"
 using std::vector;
 
 
