@@ -63,7 +63,6 @@ void Board::SelectRandomColoredCircles()
 	srand(time(NULL));
 	sf::Vector2f pos{ 0,0 };
 	int range_row = BOARD_LEN;
-	std::cout << m_maxColoredCircles << "\n";
 	for (int i = 0; i < m_maxColoredCircles; i++)
 	{
 		do

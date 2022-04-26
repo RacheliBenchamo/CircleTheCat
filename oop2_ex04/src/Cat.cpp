@@ -41,14 +41,15 @@ using namespace std;
 
 sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid)
 {
-	//QItem source(0, 0, 0);
+	//save for each vertex how discovered him
 	std::vector<std::vector<sf::Vector2<int>>> discover;
-	resetMatrix(discover);
-
-	sf::Vector2<int> source(0, 0);
+	//save the cat current place on the grid
+	sf::Vector2<int> source;
 	// To keep track of visited QItems. Marking
 	// blocked cells as visited.
 	bool visited[BOARD_LEN][BOARD_LEN];
+
+	resetMatrix(discover);
 
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
@@ -59,7 +60,7 @@ sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid
 			else
 				visited[i][j] = false;
 
-			// Finding the place tha cat standing on
+			// checking if the current place is were the cat standing on
 			if (grid[i][j].getPosition() == this->m_sprite.getPosition())
 			{
 				source.x=i;
@@ -67,9 +68,11 @@ sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid
 			}
 		}
 	}	
+	
+	//if cat encircled 
+	if (!canMove(grid, source))
+		return { -1,-1 };
 
-	
-	
 	// applying BFS on matrix cells starting from source
 	std::queue<sf::Vector2<int>> q;
 	q.push(source);
@@ -83,12 +86,9 @@ sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid
 		// Destination found;
 		if (p.x == 0 || p.x == 10 || p.y == 0 || p.y == 10)
 		{
-			std::cout << "p " << p.x << ' ' << p.y << '\n';
+			//std::cout << "p " << p.x << ' ' << p.y << '\n';
 			return calaulateFirstMove(discover, source, discover[p.x][p.y]);
 		}
-
-		if (!canMove(grid, p))
-			return { -1,-1 };
 
 		// moving up left
 		if (p.y - 1 >= 0 && visited[p.x][p.y - 1] == false)
@@ -104,7 +104,6 @@ sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid
 			q.push(sf::Vector2<int>(p.x + 1, p.y - 1));
 			visited[p.x + 1][p.y-1] = true;
 			discover[p.x + 1][p.y - 1] = sf::Vector2<int>(p.x, p.y);
-
 		}
 
 		// moving down left 
@@ -162,21 +161,20 @@ sf::Vector2<int> Cat::calaulateFirstMove(std::vector<std::vector<sf::Vector2<int
 	sf::Vector2<int> firstStep;
 	sf::Vector2<int> temp = foundExit;
 
-	std::cout <<"source "<< source.x << ' ' << source.y << '\n';
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		for (int j = 0; j < BOARD_LEN; j++)
-			std::cout << discover[i][j].x << ',' << discover[i][j].y << ' ';
-		std::cout << '\n';
-	}
+	//std::cout <<"source "<< source.x << ' ' << source.y << '\n';
+	//for (int i = 0; i < BOARD_LEN; i++)
+	//{
+	//	for (int j = 0; j < BOARD_LEN; j++)
+	//		std::cout << discover[i][j].x << ',' << discover[i][j].y << ' ';
+	//	std::cout << '\n';
+	//}
 
 	while (temp != source)
 	{
-		std::cout << "temp " << temp.x << ' ' << temp.y << '\n';
-		std::cout << "discover: " << discover[temp.x][temp.x].x << ' ' << discover[temp.x][temp.x].y << '\n';
+		//std::cout << "temp " << temp.x << ' ' << temp.y << '\n';
+		//std::cout << "discover: " << discover[temp.x][temp.x].x << ' ' << discover[temp.x][temp.x].y << '\n';
 		firstStep = temp;
 		temp = discover[temp.x][temp.x];
 	}
-	std::cout << "firstStep: " << firstStep.x << ' ' << firstStep.y << '\n';
 	return firstStep;
 }
