@@ -67,7 +67,7 @@ sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid
 				source.y = j;
 			}
 		}
-	}	
+	}	 
 	
 	//if cat encircled 
 	if (!canMove(grid, source))
