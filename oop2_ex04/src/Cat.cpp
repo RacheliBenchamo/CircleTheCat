@@ -16,16 +16,22 @@ Cat::Cat()
 //
 void Cat::move(std::vector<std::vector<sf::CircleShape>> grid)
 {
-	//if (canMove())
-	//{
-	//	//(grid, m_sprite.)
- //   }
+	sf::Vector2<int> moveTo = minDistance(grid);
+	if (moveTo != sf::Vector2<int>(-1, -1))
+		m_sprite.setPosition(grid[moveTo.x][moveTo.y].getPosition());
 }
 
-//canMove()
-//{
-//
-//}
+bool Cat::canMove(std::vector<std::vector<sf::CircleShape>> grid, sf::Vector2<int> source)
+{
+	if ((grid[source.x - 1][source.y].getFillColor() == CLICKED_COLOR)
+		&& (grid[source.x + 1][source.y].getFillColor() == CLICKED_COLOR)
+		&& (grid[source.x - 1][source.y - 1].getFillColor() == CLICKED_COLOR)
+		&& (grid[source.x - 1][source.y + 1].getFillColor() == CLICKED_COLOR)
+		&& (grid[source.x + 1][source.y - 1].getFillColor() == CLICKED_COLOR)
+		&& (grid[source.x + 1][source.y + 1].getFillColor() == CLICKED_COLOR))
+		return false;
+	return true;
+}
 
 
 // C++ Code implementation for above problem
@@ -33,9 +39,12 @@ void Cat::move(std::vector<std::vector<sf::CircleShape>> grid)
 #include <queue> 
 using namespace std;
 
-std::vector<sf::Vector2<int>> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid)
+sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid)
 {
 	//QItem source(0, 0, 0);
+	std::vector<std::vector<sf::Vector2<int>>> discover;
+	resetMatrix(discover);
+
 	sf::Vector2<int> source(0, 0);
 	// To keep track of visited QItems. Marking
 	// blocked cells as visited.
@@ -57,13 +66,13 @@ std::vector<sf::Vector2<int>> Cat::minDistance(std::vector<std::vector<sf::Circl
 				source.y = j;
 			}
 		}
-	}
+	}	
 
+	
+	
 	// applying BFS on matrix cells starting from source
-	std::vector<sf::Vector2<int>> way;
 	std::queue<sf::Vector2<int>> q;
 	q.push(source);
-
 	visited[source.x][source.y] = true;
 
 	while (!q.empty()) 
@@ -72,58 +81,102 @@ std::vector<sf::Vector2<int>> Cat::minDistance(std::vector<std::vector<sf::Circl
 		q.pop();
 
 		// Destination found;
-		if (p.x==0|| p.x == 10||p.y == 0|| p.y==10)
-			return way;
+		if (p.x == 0 || p.x == 10 || p.y == 0 || p.y == 10)
+		{
+			std::cout << "p " << p.x << ' ' << p.y << '\n';
+			return calaulateFirstMove(discover, source, discover[p.x][p.y]);
+		}
+
+		if (!canMove(grid, p))
+			return { -1,-1 };
 
 		// moving up left
-		if (p.x - 1 >= 0 && visited[p.x - 1][p.y-1] == false) 
+		if (p.y - 1 >= 0 && visited[p.x][p.y - 1] == false)
 		{
-			q.push(sf::Vector2<int>(p.x - 1, p.y - 1));
-			way.push_back(sf::Vector2<int>(p.x - 1, p.y - 1));
-			visited[p.x - 1][p.y-1] = true;
+			q.push(sf::Vector2<int>(p.x, p.y - 1));
+			visited[p.x][p.y - 1] = true;
+			discover[p.x][p.y - 1] = sf::Vector2<int>(p.x, p.y);
 		}
 
 		// moving up right
-		if (p.x - 1 >= 0 && visited[p.x - 1][p.y + 1] == false) 
+		if (p.x + 1 < BOARD_LEN && p.y - 1>=0 && visited[p.x +1][p.y - 1] == false)
 		{
-			q.push(sf::Vector2<int>(p.x - 1, p.y + 1));
-			way.push_back(sf::Vector2<int>(p.x - 1, p.y + 1));
-			visited[p.x - 1][p.y+1] = true;
+			q.push(sf::Vector2<int>(p.x + 1, p.y - 1));
+			visited[p.x + 1][p.y-1] = true;
+			discover[p.x + 1][p.y - 1] = sf::Vector2<int>(p.x, p.y);
+
 		}
 
 		// moving down left 
-		if (p.x + 1 < BOARD_LEN && visited[p.x + 1][p.y-1] == false)
+		if (p.y + 1 < BOARD_LEN && visited[p.x][p.y+1] == false)
 		{
-			q.push(sf::Vector2<int>(p.x + 1, p.y - 1));
-			way.push_back(sf::Vector2<int>(p.x + 1, p.y - 1));
-			visited[p.x + 1][p.y-1] = true;
+			q.push(sf::Vector2<int>(p.x, p.y + 1));
+			visited[p.x][p.y+1] = true;
+			discover[p.x][p.y + 1] = sf::Vector2<int>(p.x, p.y);
 		}
 
 		// moving down right
-		if (p.x + 1 < BOARD_LEN && visited[p.x + 1][p.y+1] == false)
+		if (p.x + 1 < BOARD_LEN && p.y + 1 < BOARD_LEN && visited[p.x+1][p.y + 1] == false)
 		{
 			q.push(sf::Vector2<int>(p.x+1, p.y + 1));
-			way.push_back(sf::Vector2<int>(p.x + 1, p.y + 1));
-			visited[p.x + 1][p.y+1] = true;
+			visited[p.x+1][p.y + 1] = true;
+			discover[p.x+1][p.y + 1] = sf::Vector2<int>(p.x, p.y);
 		}
 
 		// moving left
-		if (p.y - 1 >= 0 && visited[p.x][p.y - 1] == false) 
+		if (p.x - 1 >= 0 && visited[p.x-1][p.y] == false) 
 		{
-			q.push(sf::Vector2<int>(p.x, p.y + 1));
-			way.push_back(sf::Vector2<int>(p.x, p.y - 1));
-			visited[p.x][p.y - 1] = true;
+			q.push(sf::Vector2<int>(p.x-1, p.y));
+			visited[p.x-1][p.y] = true;
+			discover[p.x-1][p.y] = sf::Vector2<int>(p.x, p.y);
 		}
 
 		// moving right
-		if (p.x + 1 < BOARD_LEN && visited[p.x][p.y + 1] == false) 
+		if (p.x + 1 < BOARD_LEN && visited[p.x+1][p.y] == false) 
 		{
-			q.push(sf::Vector2<int>(p.x, p.y + 1));
-			way.push_back(sf::Vector2<int>(p.x, p.y + 1));
-			visited[p.x][p.y + 1] = true;
+			q.push(sf::Vector2<int>(p.x+1, p.y));
+			visited[p.x+1][p.y] = true;
+			discover[p.x+1 ][p.y] = sf::Vector2<int>(p.x, p.y);
 		}
 	}
-	//return -1;
 }
 
 
+void Cat::resetMatrix(std::vector<std::vector<sf::Vector2<int>>> & discover)
+{
+	for (size_t i = 0; i < BOARD_LEN; i++)
+	{
+		std::vector<sf::Vector2<int>> currRow;
+
+		for (size_t j = 0; j < BOARD_LEN; j++)
+		{
+			currRow.push_back({-1, -1});
+		}
+		discover.push_back(currRow);
+	}
+}
+
+sf::Vector2<int> Cat::calaulateFirstMove(std::vector<std::vector<sf::Vector2<int>>> discover,
+	sf::Vector2<int> source,sf::Vector2<int> foundExit)
+{
+	sf::Vector2<int> firstStep;
+	sf::Vector2<int> temp = foundExit;
+
+	std::cout <<"source "<< source.x << ' ' << source.y << '\n';
+	for (int i = 0; i < BOARD_LEN; i++)
+	{
+		for (int j = 0; j < BOARD_LEN; j++)
+			std::cout << discover[i][j].x << ',' << discover[i][j].y << ' ';
+		std::cout << '\n';
+	}
+
+	while (temp != source)
+	{
+		std::cout << "temp " << temp.x << ' ' << temp.y << '\n';
+		std::cout << "discover: " << discover[temp.x][temp.x].x << ' ' << discover[temp.x][temp.x].y << '\n';
+		firstStep = temp;
+		temp = discover[temp.x][temp.x];
+	}
+	std::cout << "firstStep: " << firstStep.x << ' ' << firstStep.y << '\n';
+	return firstStep;
+}

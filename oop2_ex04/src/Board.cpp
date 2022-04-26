@@ -70,7 +70,7 @@ void Board::SelectRandomColoredCircles()
 		{
 			pos.x =  rand() % range_row;
 			pos.y =  rand() % range_row;
-		} while (pos.x == 6 && pos.y == 6);//while its not in the cat place
+		} while (pos.x == 5 && pos.y == 5);//while its not in the cat place
 
 		m_randomColoredCircles.push_back(pos);
 	}
@@ -102,7 +102,6 @@ void Board::draw(sf::RenderWindow& window)const
 {
 	drawGrid(window);
 	m_cat.draw(window);
-	//window.draw(m_cat);
 	//window.draw(m_movingCircle);
 }
 //------------------------------------------------------
