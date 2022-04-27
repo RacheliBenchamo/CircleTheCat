@@ -110,16 +110,10 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 {
 	int x = event.mouseButton.x;
 	int y = event.mouseButton.y;
-	std::cout <<" x" << x << " y:" << y<<"\n";
 
 	for (size_t i = 0; i < BOARD_LEN; i++)
 		for (size_t j = 0; j < BOARD_LEN; j++)
 			if (m_grid[i][j].getFillColor() == BASE_COLOR)
-			{
-				std::cout << "x" << m_grid[i][j].getPosition().x << " "
-					<< m_grid[i][j].getPosition().x + (m_grid[i][j].getRadius() * 2) << "\n";
-				std::cout << "y" << m_grid[i][j].getPosition().y << " "
-					<< m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2) << "\n";
 				/* if mouse position is in circle range : pos.x < mouse.x < pos.x+radius and pos.y < mouse.y < pos.y+radius */
 				if (x > m_grid[i][j].getPosition().x &&
 					x < (m_grid[i][j].getPosition().x + (m_grid[i][j].getRadius() * 2)) &&
@@ -134,7 +128,6 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 					m_clikedCircles.push_back(sf::Vector2f(i, j));
 					m_catWay.push_back(m_cat.getPos());
 				}
-			}
 }
 //------------------------------------------------------
 
