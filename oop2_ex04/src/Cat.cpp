@@ -220,8 +220,7 @@ sf::Vector2<int> Cat::grillDirection(bool even) const
 	case LEFT:
 		return { -1, 0 };
 	case UP_LEFT:
-		if (even) return { -1, -1 };
-		else return {-1, 0};
+		if (even) return { -1, -1 }; else return {-1, 0};
 	case UP_RIGHT:
 		if (even) return { -1, 0 }; else return { -1, 1 };
 	case DOWN_LEFT:
