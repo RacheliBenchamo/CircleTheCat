@@ -1,9 +1,5 @@
 #include "Cat.h"
-#include <deque>  
-#include <queue> 
-#include <limits.h>
-#include <stdio.h>
-using namespace std;
+
 
 // A C++ program for Dijkstra's single source shortest path algorithm.
 // The program is for adjacency matrix representation of the graph
@@ -57,9 +53,10 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 {
 	std::vector<std::vector<sf::Vector2<int>>> discover;
 	sf::Vector2<int> source;
-	// To keep track of visited vertex. Marking
+	bool visited[BOARD_LEN][BOARD_LEN];	// To keep track of visited vertex. Marking
 	// blocked cells as visited.
-	bool visited[BOARD_LEN][BOARD_LEN];
+	std::queue<sf::Vector2<int>> q;
+	sf::Vector2<int> p;
 
 	resetMatrix(discover);
 	fillVisitedAndFindSource(grid, source, visited);
@@ -71,11 +68,8 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 		return { -1,-1 };
 
 	// applying BFS on matrix cells starting from source
-	std::queue<sf::Vector2<int>> q;
-	sf::Vector2<int> p;
 	q.push(source);
 	visited[source.x][source.y] = true;
-
 	while (!q.empty()) 
 	{
 		p = q.front();
@@ -89,101 +83,49 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 			return calaulateFirstMove(discover, source, discover[p.x][p.y]);
 		}
 		 //moving left
-		if (isValid(p.y - 1)  && isValid(p.x)&&  visited[p.x][p.y - 1] == false)
-		{
-			q.push(sf::Vector2<int>(p.x, p.y - 1));
-			visited[p.x][p.y - 1] = true;
-			discover[p.x][p.y - 1] = sf::Vector2<int>(p.x, p.y);
-		}
-		// moving right  
-		if (isValid(p.y + 1) && isValid(p.x) && visited[p.x][p.y+1] == false)
-		{
-			q.push(sf::Vector2<int>(p.x, p.y + 1));
-			visited[p.x][p.y+1] = true;
-			discover[p.x][p.y + 1] = sf::Vector2<int>(p.x, p.y);
-		}
+		checkDirection(p.x, p.y -1, visited, q, discover, p);
+
+		// moving right 
+		checkDirection(p.x , p.y + 1, visited, q, discover, p);
+
 		//moving up left
-		if (isValid(p.x - 1))
-		{
-			if (isLineEven(p.x))
-				if (isValid(p.y - 1) && visited[p.x - 1][p.y - 1] == false)
-				{
-					q.push(sf::Vector2<int>(p.x - 1, p.y - 1));
-					visited[p.x - 1][p.y - 1] = true;
-					discover[p.x - 1][p.y - 1] = sf::Vector2<int>(p.x, p.y);
-				}
-		}
+		if (isLineEven(p.x))
+			checkDirection(p.x - 1, p.y-1, visited, q, discover, p);
 		else
-		{
-			if (visited[p.x - 1][p.y] == false)
-			{
-				q.push(sf::Vector2<int>(p.x - 1, p.y));
-				visited[p.x - 1][p.y] = true;
-				discover[p.x - 1][p.y] = sf::Vector2<int>(p.x, p.y);
-			}
-		}
+			checkDirection(p.x - 1, p.y, visited, q, discover, p);
+		
 		//moving up right
-		if (isValid(p.x - 1))
 			if (isLineEven(p.x))
-			{
-				if (visited[p.x - 1][p.y] == false)
-				{
-					q.push(sf::Vector2<int>(p.x - 1, p.y));
-					visited[p.x - 1][p.y] = true;
-					discover[p.x - 1][p.y] = sf::Vector2<int>(p.x, p.y);
-				}
-			}	
+				checkDirection(p.x - 1, p.y, visited, q, discover, p);
 			else
-			{
-				if (isValid(p.y + 1) && visited[p.x - 1][p.y + 1] == false)
-				{
-					q.push(sf::Vector2<int>(p.x - 1, p.y + 1));
-					visited[p.x - 1][p.y + 1] = true;
-					discover[p.x - 1][p.y + 1] = sf::Vector2<int>(p.x, p.y);
-				}
-			}
+				checkDirection(p.x - 1, p.y + 1, visited, q, discover, p);
+
 		// moving down left 
-		if (isValid(p.x + 1) )
 			if (isLineEven(p.x))
-			{
-				if (isValid(p.y - 1) && visited[p.x + 1][p.y - 1] == false)
-				{
-					q.push(sf::Vector2<int>(p.x + 1, p.y - 1));
-					visited[p.x + 1][p.y - 1] = true;
-					discover[p.x + 1][p.y - 1] = sf::Vector2<int>(p.x, p.y);
-				}
-			}
+				checkDirection(p.x + 1, p.y-1, visited, q, discover, p);
 			else
-			{
-				if (visited[p.x + 1][p.y] == false)
-				{
-					q.push(sf::Vector2<int>(p.x + 1, p.y));
-					visited[p.x + 1][p.y] = true;
-					discover[p.x + 1][p.y] = sf::Vector2<int>(p.x, p.y);
-				}
-			}
+				checkDirection(p.x + 1, p.y, visited, q, discover, p);
+
 		// moving down right 
-		if (isValid(p.x + 1) )
 			if (isLineEven(p.x))
-			{
-				if (visited[p.x + 1][p.y] == false)
-				{
-					q.push(sf::Vector2<int>(p.x + 1, p.y));
-					visited[p.x + 1][p.y] = true;
-					discover[p.x + 1][p.y] = sf::Vector2<int>(p.x, p.y);
-				}
-			}	
+				checkDirection(p.x + 1, p.y, visited, q, discover, p);
 			else
-			{
-				if (isValid(p.y + 1) && visited[p.x + 1][p.y + 1] == false)
-				{
-					q.push(sf::Vector2<int>(p.x + 1, p.y + 1));
-					visited[p.x + 1][p.y + 1] = true;
-					discover[p.x + 1][p.y + 1] = sf::Vector2<int>(p.x, p.y);
-				}
-			}		
+				checkDirection(p.x + 1, p.y + 1, visited, q, discover, p);	
 	}
 	return moveCatRandomly(grid, source);
+}
+//---------------------------------------------------
+
+void Cat::checkDirection(int x, int y, bool visited[BOARD_LEN][BOARD_LEN] ,
+	std::queue<sf::Vector2<int>>& q,
+	std::vector<std::vector<sf::Vector2<int>>>& discover, sf::Vector2<int> p)
+{
+	if (isValid(y) && isValid(x) && visited[x][y] == false)
+	{
+		q.push(sf::Vector2<int>(x, y));
+		visited[x][y] = true;
+		discover[x][y] = sf::Vector2<int>(p.x, p.y);
+	}
 }
 //---------------------------------------------------
 

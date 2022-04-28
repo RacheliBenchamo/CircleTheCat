@@ -5,6 +5,12 @@
 #include <iostream>
 //#include "Board.h"
 #include "FileManager.h"
+#include <deque>  
+#include <queue> 
+#include <limits.h>
+#include <stdio.h>
+
+using namespace std;
 using std::vector;
 
 
@@ -38,7 +44,9 @@ private:
 	sf::Vector2<int> moveCatRandomly(std::vector<std::vector<sf::CircleShape>>, sf::Vector2<int>);
 	void fillVisitedAndFindSource(std::vector<std::vector<sf::CircleShape>>, sf::Vector2<int> &,
 		bool [BOARD_LEN][BOARD_LEN]);
-
+	void checkDirection(int x, int y, bool visited[BOARD_LEN][BOARD_LEN],
+		std::queue<sf::Vector2<int>>& q,
+		std::vector<std::vector<sf::Vector2<int>>>& discover, sf::Vector2<int> p);
 
 	sf::Sprite m_sprite;
 	bool m_reachedTheExit = false;
