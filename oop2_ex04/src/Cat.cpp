@@ -197,6 +197,8 @@ bool Cat::catWin( sf::Vector2<int> source)
 sf::Vector2<int> Cat::moveCatRandomly(std::vector<std::vector<sf::CircleShape>> grid
 	, sf::Vector2<int> source)
 {
+	std::cout << " start moveCatRandomly\n";
+
 	bool even = isLineEven(source.x);
 
 	sf::Vector2<int> pos{ 0,0 };
@@ -206,6 +208,9 @@ sf::Vector2<int> Cat::moveCatRandomly(std::vector<std::vector<sf::CircleShape>> 
 	} while (grid[pos.x+ source.x][pos.y+ source.y].getFillColor() == CLICKED_COLOR);
 	pos += source;
 	return pos;
+
+	std::cout << " end moveCatRandomly\n";
+
 }
 //----------------------------------------------------
 
@@ -213,6 +218,7 @@ sf::Vector2<int> Cat::grillDirection(bool even) const
 {
 	int dir = rand() % 6;
 	sf::Vector2<int> res;
+
 	switch ((direction)dir)
 	{
 	case RIGHT:
@@ -229,4 +235,5 @@ sf::Vector2<int> Cat::grillDirection(bool even) const
 		if (even) return { 1, 0 }; else return { 1, 1 };
 	}
 	return { 0, 0 };
+
 }

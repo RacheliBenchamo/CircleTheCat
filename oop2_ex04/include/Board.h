@@ -42,7 +42,7 @@ private:
 	void drawGrid(sf::RenderWindow& window)const;
 	void takeCatBackToPrevPos();
 
-	int m_maxColoredCircles = 14;
+	int m_maxColoredCircles = 30;
 	bool m_winLevel = false;
 	bool m_loseLevel = false;
 	bool m_restart = false;
