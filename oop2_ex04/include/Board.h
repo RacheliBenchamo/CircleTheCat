@@ -33,6 +33,7 @@ private:
 	void setGrid();
 	void setLevel();
 	void setCat();
+	void doCatStuff();
 	void SelectRandomColoredCircles();
 	void UpdatePaintedCircles();
 	void ColoringCirclesToBeginningColor();

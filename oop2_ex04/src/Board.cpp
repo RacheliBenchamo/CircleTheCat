@@ -20,6 +20,8 @@ void Board::setBoard()
 void Board::setCat()
 {
 	m_cat.setPos(CAT_START_POS);
+	m_catWay.push_back(m_cat.getPos());
+
 }
 //------------------------------------------------------
 // draws the grid
@@ -120,13 +122,10 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 					y > m_grid[i][j].getPosition().y &&
 					y < (m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2)))
 				{
-
 					coloringCurrentCircle(i, j);
-					m_cat.move(m_grid);
+					doCatStuff();
 					m_clickCount++;
-
 					m_clikedCircles.push_back(sf::Vector2f(i, j));
-					m_catWay.push_back(m_cat.getPos());
 				}
 }
 //------------------------------------------------------
@@ -134,14 +133,17 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 void Board::restartLevel()
 {
 	m_restart = true;
+	m_loseLevel = false;
 	m_clickCount = 0;
 	setLevel();
+	setCat();
 }
 //------------------------------------------------------
 
 void Board::startNewLevel()
 {
 	m_maxColoredCircles -= 2;
+	m_winLevel = false;
 	setLevel();
 	setCat();
 }
@@ -186,4 +188,24 @@ void Board::takeCatBackToPrevPos()
 {
 	m_catWay.pop_back();
 	m_cat.setPos(m_catWay[m_catWay.size() - 1]);
+}
+
+void Board::doCatStuff()
+{
+	m_cat.move(m_grid);
+
+	if (m_cat.reachedTheExit())
+	{
+		m_loseLevel = true;
+		m_cat.resetReachedTheExit();
+	}
+
+	if (m_cat.trapped())
+	{
+		m_winLevel = true;
+		m_cat.resetTrapped();
+	}
+
+	m_catWay.push_back(m_cat.getPos());
+
 }

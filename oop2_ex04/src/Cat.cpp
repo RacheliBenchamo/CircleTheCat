@@ -16,7 +16,7 @@ Cat::Cat()
 //
 void Cat::move(std::vector<std::vector<sf::CircleShape>> grid)
 {
-	sf::Vector2<int> moveTo = minDistance(grid);
+	sf::Vector2<int> moveTo = findAPath(grid);
 	if (moveTo != sf::Vector2<int>(-1, -1))
 		m_sprite.setPosition(grid[moveTo.x][moveTo.y].getPosition());
 }
@@ -25,11 +25,14 @@ bool Cat::canMove(std::vector<std::vector<sf::CircleShape>> grid, sf::Vector2<in
 {
 	if ((grid[source.x - 1][source.y].getFillColor() == CLICKED_COLOR)
 		&& (grid[source.x + 1][source.y].getFillColor() == CLICKED_COLOR)
-		&& (grid[source.x - 1][source.y - 1].getFillColor() == CLICKED_COLOR)
+		&& (grid[source.x][source.y - 1].getFillColor() == CLICKED_COLOR)
 		&& (grid[source.x - 1][source.y + 1].getFillColor() == CLICKED_COLOR)
 		&& (grid[source.x + 1][source.y - 1].getFillColor() == CLICKED_COLOR)
-		&& (grid[source.x + 1][source.y + 1].getFillColor() == CLICKED_COLOR))
+		&& (grid[source.x][source.y + 1].getFillColor() == CLICKED_COLOR))
+	{
+		m_trapped = true;
 		return false;
+	}
 	return true;
 }
 
@@ -50,13 +53,13 @@ bool Cat::isLineEven(int line)
 #include <queue> 
 using namespace std;
 
-sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid)
+sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 {
-	//save for each vertex how discovered him
+	//save for each vertex which vertex discovered him
 	std::vector<std::vector<sf::Vector2<int>>> discover;
 	//save the cat current place on the grid
 	sf::Vector2<int> source;
-	// To keep track of visited QItems. Marking
+	// To keep track of visited vertex. Marking
 	// blocked cells as visited.
 	bool visited[BOARD_LEN][BOARD_LEN];
 
@@ -80,24 +83,30 @@ sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid
 		}
 	}	 
 	
+
+	if(catWin( source))
+		return { -1,-1 };
+
 	//if cat encircled 
 	if (!canMove(grid, source))
 		return { -1,-1 };
 
 	// applying BFS on matrix cells starting from source
 	std::queue<sf::Vector2<int>> q;
+	sf::Vector2<int> p;
 	q.push(source);
 	visited[source.x][source.y] = true;
 
 	while (!q.empty()) 
 	{
-		sf::Vector2<int> p = q.front();
+		p = q.front();
 		q.pop();
 
 		// Destination found;
 		if (p.x == 0 || p.x == 10 || p.y == 0 || p.y == 10)
 		{
-			//std::cout << "p " << p.x << ' ' << p.y << '\n';
+			if (source == discover[p.x][p.y])
+				return p;
 			return calaulateFirstMove(discover, source, discover[p.x][p.y]);
 		}
 
@@ -208,6 +217,7 @@ sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid
 			}
 				
 	}
+	return moveCatRandomly(grid, source);
 }
 
 
@@ -228,23 +238,36 @@ void Cat::resetMatrix(std::vector<std::vector<sf::Vector2<int>>> & discover)
 sf::Vector2<int> Cat::calaulateFirstMove(std::vector<std::vector<sf::Vector2<int>>> discover,
 	sf::Vector2<int> source,sf::Vector2<int> foundExit)
 {
-	sf::Vector2<int> firstStep;
 	sf::Vector2<int> temp = foundExit;
-
-	//std::cout <<"source "<< source.x << ' ' << source.y << '\n';
-	//for (int i = 0; i < BOARD_LEN; i++)
-	//{
-	//	for (int j = 0; j < BOARD_LEN; j++)
-	//		std::cout << discover[i][j].x << ',' << discover[i][j].y << ' ';
-	//	std::cout << '\n';
-	//}
+	sf::Vector2<int> firstStep = temp;
 
 	while (temp != source)
 	{
-		//std::cout << "temp " << temp.x << ' ' << temp.y << '\n';
-		//std::cout << "discover: " << discover[temp.x][temp.x].x << ' ' << discover[temp.x][temp.x].y << '\n';
 		firstStep = temp;
 		temp = discover[temp.x][temp.y];
 	}
 	return firstStep;
+}
+
+
+bool Cat::catWin( sf::Vector2<int> source)
+{
+	if (source.x == 0 || source.x == 10 || source.y == 0 || source.y == 10)
+	{
+		m_reachedTheExit=true;
+		return true;
+	}
+	return false;
+}
+
+sf::Vector2<int> Cat::moveCatRandomly(std::vector<std::vector<sf::CircleShape>> grid
+	, sf::Vector2<int> source)
+{
+	//sf::Vector2<int> pos{ 0,0 };
+	//do
+	//{
+	//	pos.x = rand() % 2;
+	//	pos.y = rand() % 2;
+	//} while (pos.x == 5 && pos.y == 5);//while its not in the cat place
+	return { -1,-1 };
 }
