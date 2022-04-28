@@ -29,5 +29,7 @@ public:
 
 private:
 	sf::Sprite m_sprite;
+	bool isValid(int);
 	bool m_reachedTheExit = false;
+	bool isLineEven(int);
 };

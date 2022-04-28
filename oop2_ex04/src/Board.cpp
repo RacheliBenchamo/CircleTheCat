@@ -120,11 +120,12 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 					y > m_grid[i][j].getPosition().y &&
 					y < (m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2)))
 				{
+
 					coloringCurrentCircle(i, j);
 					m_cat.move(m_grid);
 					m_clickCount++;
 
-					m_clikedCircles.push_back(sf::Vector2f( i,j ));
+					m_clikedCircles.push_back(sf::Vector2f(i, j));
 					m_catWay.push_back(m_cat.getPos());
 				}
 }

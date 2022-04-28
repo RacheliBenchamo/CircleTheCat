@@ -33,6 +33,17 @@ bool Cat::canMove(std::vector<std::vector<sf::CircleShape>> grid, sf::Vector2<in
 	return true;
 }
 
+bool Cat::isValid(int ind)
+{
+	return ind >= 0 && ind < BOARD_LEN;
+}
+
+bool Cat::isLineEven(int line)
+{
+	return line % 2 == 0;
+	std::cout << line;
+}
+
 
 // C++ Code implementation for above problem
 #include <deque>  
@@ -90,53 +101,112 @@ sf::Vector2<int> Cat::minDistance(std::vector<std::vector<sf::CircleShape>> grid
 			return calaulateFirstMove(discover, source, discover[p.x][p.y]);
 		}
 
-		// moving up left
-		if (p.y - 1 >= 0 && visited[p.x][p.y - 1] == false)
+		 //moving left
+		if (isValid(p.y - 1)  && isValid(p.x)&&  visited[p.x][p.y - 1] == false)
 		{
 			q.push(sf::Vector2<int>(p.x, p.y - 1));
 			visited[p.x][p.y - 1] = true;
 			discover[p.x][p.y - 1] = sf::Vector2<int>(p.x, p.y);
 		}
 
-		// moving up right
-		if (p.x + 1 < BOARD_LEN && p.y - 1>=0 && visited[p.x +1][p.y - 1] == false)
-		{
-			q.push(sf::Vector2<int>(p.x + 1, p.y - 1));
-			visited[p.x + 1][p.y-1] = true;
-			discover[p.x + 1][p.y - 1] = sf::Vector2<int>(p.x, p.y);
-		}
-
-		// moving down left 
-		if (p.y + 1 < BOARD_LEN && visited[p.x][p.y+1] == false)
+		// moving right  
+		if (isValid(p.y + 1) && isValid(p.x) && visited[p.x][p.y+1] == false)
 		{
 			q.push(sf::Vector2<int>(p.x, p.y + 1));
 			visited[p.x][p.y+1] = true;
 			discover[p.x][p.y + 1] = sf::Vector2<int>(p.x, p.y);
 		}
 
-		// moving down right
-		if (p.x + 1 < BOARD_LEN && p.y + 1 < BOARD_LEN && visited[p.x+1][p.y + 1] == false)
+		//moving up left
+		if (isValid(p.x - 1))
 		{
-			q.push(sf::Vector2<int>(p.x+1, p.y + 1));
-			visited[p.x+1][p.y + 1] = true;
-			discover[p.x+1][p.y + 1] = sf::Vector2<int>(p.x, p.y);
+			if (isLineEven(p.x))
+				if (isValid(p.y - 1) && visited[p.x - 1][p.y - 1] == false)
+				{
+					q.push(sf::Vector2<int>(p.x - 1, p.y - 1));
+					visited[p.x - 1][p.y - 1] = true;
+					discover[p.x - 1][p.y - 1] = sf::Vector2<int>(p.x, p.y);
+				}
 		}
+		else
+		{
+			if (visited[p.x - 1][p.y] == false)
+			{
+				q.push(sf::Vector2<int>(p.x - 1, p.y));
+				visited[p.x - 1][p.y] = true;
+				discover[p.x - 1][p.y] = sf::Vector2<int>(p.x, p.y);
+			}
+		}
+				
 
-		// moving left
-		if (p.x - 1 >= 0 && visited[p.x-1][p.y] == false) 
-		{
-			q.push(sf::Vector2<int>(p.x-1, p.y));
-			visited[p.x-1][p.y] = true;
-			discover[p.x-1][p.y] = sf::Vector2<int>(p.x, p.y);
-		}
-
-		// moving right
-		if (p.x + 1 < BOARD_LEN && visited[p.x+1][p.y] == false) 
-		{
-			q.push(sf::Vector2<int>(p.x+1, p.y));
-			visited[p.x+1][p.y] = true;
-			discover[p.x+1 ][p.y] = sf::Vector2<int>(p.x, p.y);
-		}
+		//moving up right
+		if (isValid(p.x - 1))
+			if (isLineEven(p.x))
+			{
+				if (visited[p.x - 1][p.y] == false)
+				{
+					q.push(sf::Vector2<int>(p.x - 1, p.y));
+					visited[p.x - 1][p.y] = true;
+					discover[p.x - 1][p.y] = sf::Vector2<int>(p.x, p.y);
+				}
+			}
+				
+			else
+			{
+				if (isValid(p.y + 1) && visited[p.x - 1][p.y + 1] == false)
+				{
+					q.push(sf::Vector2<int>(p.x - 1, p.y + 1));
+					visited[p.x - 1][p.y + 1] = true;
+					discover[p.x - 1][p.y + 1] = sf::Vector2<int>(p.x, p.y);
+				}
+			}
+				
+		 
+		// moving down left 
+		if (isValid(p.x + 1) )
+			if (isLineEven(p.x))
+			{
+				if (isValid(p.y - 1) && visited[p.x + 1][p.y - 1] == false)
+				{
+					q.push(sf::Vector2<int>(p.x + 1, p.y - 1));
+					visited[p.x + 1][p.y - 1] = true;
+					discover[p.x + 1][p.y - 1] = sf::Vector2<int>(p.x, p.y);
+				}
+			}
+				
+			else
+			{
+				if (visited[p.x + 1][p.y] == false)
+				{
+					q.push(sf::Vector2<int>(p.x + 1, p.y));
+					visited[p.x + 1][p.y] = true;
+					discover[p.x + 1][p.y] = sf::Vector2<int>(p.x, p.y);
+				}
+			}
+				
+		
+		// moving down right 
+		if (isValid(p.x + 1) )
+			if (isLineEven(p.x))
+			{
+				if (visited[p.x + 1][p.y] == false)
+				{
+					q.push(sf::Vector2<int>(p.x + 1, p.y));
+					visited[p.x + 1][p.y] = true;
+					discover[p.x + 1][p.y] = sf::Vector2<int>(p.x, p.y);
+				}
+			}
+				
+			else
+			{
+				if (isValid(p.y + 1) && visited[p.x + 1][p.y + 1] == false)
+				{
+					q.push(sf::Vector2<int>(p.x + 1, p.y + 1));
+					visited[p.x + 1][p.y + 1] = true;
+					discover[p.x + 1][p.y + 1] = sf::Vector2<int>(p.x, p.y);
+				}
+			}
+				
 	}
 }
 
@@ -174,7 +244,7 @@ sf::Vector2<int> Cat::calaulateFirstMove(std::vector<std::vector<sf::Vector2<int
 		//std::cout << "temp " << temp.x << ' ' << temp.y << '\n';
 		//std::cout << "discover: " << discover[temp.x][temp.x].x << ' ' << discover[temp.x][temp.x].y << '\n';
 		firstStep = temp;
-		temp = discover[temp.x][temp.x];
+		temp = discover[temp.x][temp.y];
 	}
 	return firstStep;
 }
