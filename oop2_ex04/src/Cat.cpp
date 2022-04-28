@@ -1,11 +1,13 @@
 #include "Cat.h"
-
+#include <deque>  
+#include <queue> 
+#include <limits.h>
+#include <stdio.h>
+using namespace std;
 
 // A C++ program for Dijkstra's single source shortest path algorithm.
 // The program is for adjacency matrix representation of the graph
 
-#include <limits.h>
-#include <stdio.h>
 Cat::Cat()
 {
 	auto m_pTexture = FileManager::p2FileManager().getCatTexture();
@@ -13,13 +15,14 @@ Cat::Cat()
 	m_sprite.scale(BUTTONS_SCALE);
 }
 //---------------------------------------------------
-//
+
 void Cat::move(std::vector<std::vector<sf::CircleShape>> grid)
 {
 	sf::Vector2<int> moveTo = findAPath(grid);
 	if (moveTo != sf::Vector2<int>(-1, -1))
 		m_sprite.setPosition(grid[moveTo.x][moveTo.y].getPosition());
 }
+//---------------------------------------------------
 
 bool Cat::canMove(std::vector<std::vector<sf::CircleShape>> grid, sf::Vector2<int> source)
 {
@@ -35,59 +38,35 @@ bool Cat::canMove(std::vector<std::vector<sf::CircleShape>> grid, sf::Vector2<in
 	}
 	return true;
 }
+//---------------------------------------------------
 
 bool Cat::isValid(int ind)
 {
 	return ind >= 0 && ind < BOARD_LEN;
 }
+//---------------------------------------------------
 
 bool Cat::isLineEven(int line)
 {
 	return line % 2 == 0;
 	std::cout << line;
 }
-
-
-// C++ Code implementation for above problem
-#include <deque>  
-#include <queue> 
-using namespace std;
+//---------------------------------------------------
 
 sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 {
-	//save for each vertex which vertex discovered him
 	std::vector<std::vector<sf::Vector2<int>>> discover;
-	//save the cat current place on the grid
 	sf::Vector2<int> source;
 	// To keep track of visited vertex. Marking
 	// blocked cells as visited.
 	bool visited[BOARD_LEN][BOARD_LEN];
 
 	resetMatrix(discover);
-
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		for (int j = 0; j < BOARD_LEN; j++)
-		{
-			if (grid[i][j].getFillColor() == CLICKED_COLOR)//cant pass them
-				visited[i][j] = true;
-			else
-				visited[i][j] = false;
-
-			// checking if the current place is were the cat standing on
-			if (grid[i][j].getPosition() == this->m_sprite.getPosition())
-			{
-				source.x=i;
-				source.y = j;
-			}
-		}
-	}	 
-	
+	fillVisitedAndFindSource(grid, source, visited);
 
 	if(catWin( source))
 		return { -1,-1 };
 
-	//if cat encircled 
 	if (!canMove(grid, source))
 		return { -1,-1 };
 
@@ -109,7 +88,6 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 				return p;
 			return calaulateFirstMove(discover, source, discover[p.x][p.y]);
 		}
-
 		 //moving left
 		if (isValid(p.y - 1)  && isValid(p.x)&&  visited[p.x][p.y - 1] == false)
 		{
@@ -117,7 +95,6 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 			visited[p.x][p.y - 1] = true;
 			discover[p.x][p.y - 1] = sf::Vector2<int>(p.x, p.y);
 		}
-
 		// moving right  
 		if (isValid(p.y + 1) && isValid(p.x) && visited[p.x][p.y+1] == false)
 		{
@@ -125,7 +102,6 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 			visited[p.x][p.y+1] = true;
 			discover[p.x][p.y + 1] = sf::Vector2<int>(p.x, p.y);
 		}
-
 		//moving up left
 		if (isValid(p.x - 1))
 		{
@@ -146,8 +122,6 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 				discover[p.x - 1][p.y] = sf::Vector2<int>(p.x, p.y);
 			}
 		}
-				
-
 		//moving up right
 		if (isValid(p.x - 1))
 			if (isLineEven(p.x))
@@ -158,8 +132,7 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 					visited[p.x - 1][p.y] = true;
 					discover[p.x - 1][p.y] = sf::Vector2<int>(p.x, p.y);
 				}
-			}
-				
+			}	
 			else
 			{
 				if (isValid(p.y + 1) && visited[p.x - 1][p.y + 1] == false)
@@ -169,8 +142,6 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 					discover[p.x - 1][p.y + 1] = sf::Vector2<int>(p.x, p.y);
 				}
 			}
-				
-		 
 		// moving down left 
 		if (isValid(p.x + 1) )
 			if (isLineEven(p.x))
@@ -182,7 +153,6 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 					discover[p.x + 1][p.y - 1] = sf::Vector2<int>(p.x, p.y);
 				}
 			}
-				
 			else
 			{
 				if (visited[p.x + 1][p.y] == false)
@@ -192,8 +162,6 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 					discover[p.x + 1][p.y] = sf::Vector2<int>(p.x, p.y);
 				}
 			}
-				
-		
 		// moving down right 
 		if (isValid(p.x + 1) )
 			if (isLineEven(p.x))
@@ -204,8 +172,7 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 					visited[p.x + 1][p.y] = true;
 					discover[p.x + 1][p.y] = sf::Vector2<int>(p.x, p.y);
 				}
-			}
-				
+			}	
 			else
 			{
 				if (isValid(p.y + 1) && visited[p.x + 1][p.y + 1] == false)
@@ -214,12 +181,11 @@ sf::Vector2<int> Cat::findAPath(std::vector<std::vector<sf::CircleShape>> grid)
 					visited[p.x + 1][p.y + 1] = true;
 					discover[p.x + 1][p.y + 1] = sf::Vector2<int>(p.x, p.y);
 				}
-			}
-				
+			}		
 	}
 	return moveCatRandomly(grid, source);
 }
-
+//---------------------------------------------------
 
 void Cat::resetMatrix(std::vector<std::vector<sf::Vector2<int>>> & discover)
 {
@@ -234,6 +200,31 @@ void Cat::resetMatrix(std::vector<std::vector<sf::Vector2<int>>> & discover)
 		discover.push_back(currRow);
 	}
 }
+//---------------------------------------------------
+
+void Cat::fillVisitedAndFindSource(std::vector<std::vector<sf::CircleShape>> grid,
+	sf::Vector2<int>& source, bool visited[BOARD_LEN][BOARD_LEN])
+{
+
+	for (int i = 0; i < BOARD_LEN; i++)
+	{
+		for (int j = 0; j < BOARD_LEN; j++)
+		{
+			if (grid[i][j].getFillColor() == CLICKED_COLOR)//cant pass them
+				visited[i][j] = true;
+			else
+				visited[i][j] = false;
+
+			// checking if the current place is were the cat standing on
+			if (grid[i][j].getPosition() == this->m_sprite.getPosition())
+			{
+				source.x = i;
+				source.y = j;
+			}
+		}
+	}
+}
+//---------------------------------------------------
 
 sf::Vector2<int> Cat::calaulateFirstMove(std::vector<std::vector<sf::Vector2<int>>> discover,
 	sf::Vector2<int> source,sf::Vector2<int> foundExit)
@@ -248,7 +239,7 @@ sf::Vector2<int> Cat::calaulateFirstMove(std::vector<std::vector<sf::Vector2<int
 	}
 	return firstStep;
 }
-
+//---------------------------------------------------
 
 bool Cat::catWin( sf::Vector2<int> source)
 {
@@ -259,6 +250,7 @@ bool Cat::catWin( sf::Vector2<int> source)
 	}
 	return false;
 }
+//---------------------------------------------------
 
 sf::Vector2<int> Cat::moveCatRandomly(std::vector<std::vector<sf::CircleShape>> grid
 	, sf::Vector2<int> source)

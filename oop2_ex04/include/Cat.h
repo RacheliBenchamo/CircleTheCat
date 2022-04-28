@@ -36,6 +36,8 @@ private:
 	bool catWin( sf::Vector2<int> );
 	bool isValid(int);
 	sf::Vector2<int> moveCatRandomly(std::vector<std::vector<sf::CircleShape>>, sf::Vector2<int>);
+	void fillVisitedAndFindSource(std::vector<std::vector<sf::CircleShape>>, sf::Vector2<int> &,
+		bool [BOARD_LEN][BOARD_LEN]);
 
 
 	sf::Sprite m_sprite;
