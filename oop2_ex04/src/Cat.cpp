@@ -263,11 +263,34 @@ bool Cat::catWin( sf::Vector2<int> source)
 sf::Vector2<int> Cat::moveCatRandomly(std::vector<std::vector<sf::CircleShape>> grid
 	, sf::Vector2<int> source)
 {
-	//sf::Vector2<int> pos{ 0,0 };
-	//do
-	//{
-	//	pos.x = rand() % 2;
-	//	pos.y = rand() % 2;
-	//} while (pos.x == 5 && pos.y == 5);//while its not in the cat place
-	return { -1,-1 };
+	sf::Vector2<int> pos{ 0,0 };
+	do
+	{
+		pos = grillDirection();
+	} while (grid[pos.x+ source.x][pos.y+ source.y].getFillColor() == CLICKED_COLOR);
+	pos += source;
+	return pos;
+}
+//----------------------------------------------------
+
+sf::Vector2<int> Cat::grillDirection() const
+{
+	int dir = rand() % 6;
+
+	switch ((direction)dir)
+	{
+	case RIGHT:
+		return  { 1, 0 };
+	case LEFT:
+		return { -1, 0 };
+	case UP_LEFT:
+		return  { 0, -1 };
+	case UP_RIGHT:
+		return { 1, -1 };
+	case DOWN_LEFT:
+		return { -1, 1 };
+	case DOWN_RIGHT:
+		return { 0, 1 };
+	}
+	return { 0, 0 };
 }

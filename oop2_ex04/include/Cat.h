@@ -32,6 +32,7 @@ public:
 
 private:
 	bool isLineEven(int);
+	sf::Vector2<int> grillDirection() const;
 	bool catWin( sf::Vector2<int> );
 	bool isValid(int);
 	sf::Vector2<int> moveCatRandomly(std::vector<std::vector<sf::CircleShape>>, sf::Vector2<int>);
