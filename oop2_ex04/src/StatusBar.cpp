@@ -7,7 +7,7 @@
 //--------------------------------------------------
 //constructor
 
-StatusBar::StatusBar() : m_level(0)
+StatusBar::StatusBar() : m_level(1)
 {
 	this->m_font = (*(FileManager::p2FileManager().getFont()));
 	setHeadlineText();

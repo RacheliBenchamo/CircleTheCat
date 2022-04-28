@@ -33,7 +33,6 @@ private:
 	void drawButtons(sf::RenderWindow& );
 
 
-	
 	int m_level;
 	sf::RectangleShape m_buttonLiner;
 	sf::Text m_currClicksText;

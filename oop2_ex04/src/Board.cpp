@@ -55,6 +55,7 @@ void Board::setGrid()
 
 void Board::setLevel()
 {
+	m_clickCount = 0;
 	ColoringCirclesToBeginningColor();
 	UpdatePaintedCircles();
 }

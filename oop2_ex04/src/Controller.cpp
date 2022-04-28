@@ -18,7 +18,7 @@ Controller::Controller()
 
 void Controller::run()
 {
-	int levCount = 0;
+	int levCount = 1;
 	m_backGroundMusic.play();
 	m_backGroundMusic.setLoop(true);
 	m_backGroundMusic.setVolume(VOLUME_BG);
@@ -43,6 +43,7 @@ void Controller::run()
 				//win level msg
 				m_board.startNewLevel();
 				levCount++;
+				m_statusBar.setLevel(levCount);
 			}
 			else
 				endGame();
