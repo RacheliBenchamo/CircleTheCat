@@ -205,6 +205,7 @@ sf::Vector2<int> Cat::moveCatRandomly(std::vector<std::vector<sf::CircleShape>> 
 	do
 	{
 		pos = grillDirection(even);
+		cout << " " <<pos.x + source.x << " " << pos.y + source.y <<"\n";
 	} while (grid[pos.x+ source.x][pos.y+ source.y].getFillColor() == CLICKED_COLOR);
 	pos += source;
 	return pos;
@@ -212,6 +213,113 @@ sf::Vector2<int> Cat::moveCatRandomly(std::vector<std::vector<sf::CircleShape>> 
 	std::cout << " end moveCatRandomly\n";
 
 }
+ 
+//sf::Vector2<int> Cat::moveCatRandomly(std::vector<std::vector<sf::CircleShape>> grid
+//	, sf::Vector2<int> source)
+//{
+//	std::cout << " start moveCatRandomly\n";
+//	sf::Vector2<int> pos{ 0,0 };
+//
+//	bool even = isLineEven(source.x);
+//
+//	//moving left
+//	if (grid[source.x][source.y - 1].getFillColor() == BASE_COLOR)
+//	{
+//		pos = { source.x,source.y - 1 };
+//		return pos;
+//	}
+//
+//
+//	if (grid[source.x][source.y + 1].getFillColor() == BASE_COLOR)
+//	{
+//		pos = { source.x,source.y + 1 };
+//		return pos;
+//	}
+//
+//
+//	//moving up left
+//	if (isLineEven(source.x))
+//	{
+//		if (grid[source.x - 1][source.y - 1].getFillColor() == BASE_COLOR)
+//		{
+//			pos = { source.x - 1,source.y - 1 };
+//			return pos;
+//		}
+//	}		
+//	else
+//	{
+//		if (grid[source.x - 1][source.y].getFillColor() == BASE_COLOR)
+//		{
+//			pos = { source.x - 1,source.y };
+//			return pos;
+//		}
+//	}
+//		
+//			
+//
+//	//moving up right
+//	if (isLineEven(source.x))
+//	{
+//		if (grid[source.x - 1][source.y ].getFillColor() == BASE_COLOR)
+//		{
+//			pos = { source.x - 1,source.y  };
+//			return pos;
+//		}
+//	}		
+//	else
+//	{
+//		if (grid[source.x - 1][source.y + 1].getFillColor() == BASE_COLOR)
+//		{
+//			pos = { source.x - 1,source.y + 1 };
+//			return pos;
+//		}
+//	}
+//		
+//			
+//	// moving down left 
+//	if (isLineEven(source.x))
+//	{
+//		if (grid[source.x + 1][source.y - 1].getFillColor() == BASE_COLOR)
+//		{
+//			pos = { source.x + 1,source.y - 1 };
+//			return pos;
+//		}
+//	}
+//			
+//	else
+//	{
+//		if (grid[source.x + 1][source.y].getFillColor() == BASE_COLOR)
+//		{
+//			pos = { source.x + 1,source.y };
+//			return pos;
+//		}
+//	}
+//		
+//			
+//
+//	// moving down right 
+//	if (isLineEven(source.x))
+//	{
+//		if (grid[source.x + 1][source.y].getFillColor() == BASE_COLOR)
+//		{
+//			pos = { source.x + 1,source.y };
+//			return pos;
+//		}
+//	}
+//			
+//	else
+//	{
+//		if (grid[source.x + 1][source.y + 1].getFillColor() == BASE_COLOR)
+//		{
+//			pos = { source.x + 1,source.y + 1 };
+//			return pos;
+//		}
+//	}
+//		
+//			
+//	std::cout << " end moveCatRandomly\n";
+//
+//}
 //----------------------------------------------------
 
 sf::Vector2<int> Cat::grillDirection(bool even) const
@@ -221,18 +329,18 @@ sf::Vector2<int> Cat::grillDirection(bool even) const
 
 	switch ((direction)dir)
 	{
-	case RIGHT:
-		return  { 1, 0 };
 	case LEFT:
-		return { -1, 0 };
-	case UP_LEFT:
-		if (even) return { -1, -1 }; else return {-1, 0};
+		return { 0, -1 };
+	case RIGHT:
+		return  { 0, 1 };
 	case UP_RIGHT:
 		if (even) return { -1, 0 }; else return { -1, 1 };
-	case DOWN_LEFT:
-		if (even) return { 1, -1 }; else return { 1, 0 };
+	case UP_LEFT:
+		if (even) return { -1, -1 }; else return {-1, 0};
 	case DOWN_RIGHT:
 		if (even) return { 1, 0 }; else return { 1, 1 };
+	case DOWN_LEFT:
+		if (even) return { 1, -1 }; else return { 1, 0 };
 	}
 	return { 0, 0 };
 
