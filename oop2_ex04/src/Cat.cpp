@@ -12,11 +12,15 @@ Cat::Cat()
 }
 //---------------------------------------------------
 
-void Cat::move(std::vector<std::vector<sf::CircleShape>> grid)
+void Cat::move(std::vector<std::vector<sf::CircleShape>> grid, sf::Time& deltaTime)
 {
-	sf::Vector2<int> moveTo = findAPath(grid);
-	if (moveTo != sf::Vector2<int>(-1, -1))
-		m_sprite.setPosition(grid[moveTo.x][moveTo.y].getPosition());
+
+	m_currDirection = sf::Vector2f(findAPath(grid));
+	if (m_currDirection != sf::Vector2f(-1, -1))
+		m_sprite.setPosition(grid[m_currDirection.x][m_currDirection.y].getPosition());
+
+	//updateAnimation();
+	//m_sprite.move(m_currDirection* BASE_SPEED * deltaTime.asSeconds());
 }
 //---------------------------------------------------
 
@@ -234,7 +238,30 @@ sf::Vector2<int> Cat::grillDirection(bool even) const
 
 }
 //---------------------------------------------------
- 
+void Cat::updateAnimation()
+{
+	/*if (m_currDirection == DVec[DOWN])
+	{
+		m_animationRow = 0;
+		updateSpriteCol();
+	}
+	else if (m_currDirection == DVec[LEFT])
+	{
+		m_animationRow = 1;
+		updateSpriteCol();
+	}
+	else if (m_currDirection == DVec[RIGHT])
+	{
+		m_animationRow = 2;
+		updateSpriteCol();
+	}
+	else if (m_currDirection == DVec[UP])
+	{
+		m_animationRow = 3;
+		updateSpriteCol();
+	}*/
+}
+
 //sf::Vector2<int> Cat::moveCatRandomly(std::vector<std::vector<sf::CircleShape>> grid
 //	, sf::Vector2<int> source)
 //{

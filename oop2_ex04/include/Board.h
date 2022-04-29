@@ -1,6 +1,4 @@
 #pragma once
-//#include <SFML\Graphics.hpp>
-//#include <vector>
 #include <memory>
 #include<stdio.h>
 #include <fstream>
@@ -17,7 +15,7 @@ public:
 	~Board() {};
 
 	void draw(sf::RenderWindow& window)const;
-	void mouseButtonReleased(sf::Event event, sf::RenderWindow& window);
+	void mouseButtonReleased(sf::Event , sf::RenderWindow& , sf::Time );
 	void setClickCount(const int clicks) { m_clickCount = clicks; }
 	int getClickCount()const { return m_clickCount; }
 	void setWinLevel(const bool isWin) { m_winLevel = isWin; }
@@ -33,7 +31,7 @@ private:
 	void setGrid();
 	void setLevel();
 	void setCat();
-	void doCatStuff();
+	void doCatStuff(sf::Time& deltaTime);
 	void SelectRandomColoredCircles();
 	void UpdatePaintedCircles();
 	void ColoringCirclesToBeginningColor();

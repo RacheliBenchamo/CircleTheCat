@@ -26,10 +26,10 @@ public:
 	void resetReachedTheExit() { m_reachedTheExit = false; };
 	void resetTrapped() { m_trapped = false; };
 
-	void move(std::vector<std::vector<sf::CircleShape>>) ;
+	void move(std::vector<std::vector<sf::CircleShape>>, sf::Time& deltaTime) ;
 	void draw (sf::RenderWindow& window) const {window.draw(m_sprite);}
 	sf::Vector2<int> findAPath(std::vector<std::vector<sf::CircleShape>> );
-	void setPos(sf::Vector2f pos) { m_sprite.setPosition(pos); };
+	void setPos(sf::Vector2f pos) { m_sprite.setPosition(pos); }
 	sf::Vector2f getPos() { return m_sprite.getPosition(); };
 	void resetMatrix(std::vector<std::vector<sf::Vector2<int>>> &);
 	sf::Vector2<int> calaulateFirstMove(std::vector<std::vector<sf::Vector2<int>>>, 
@@ -37,6 +37,7 @@ public:
 	bool canMove(std::vector<std::vector<sf::CircleShape>> , sf::Vector2<int> );
 
 private:
+	void updateAnimation();
 	bool isLineEven(int);
 	sf::Vector2<int> grillDirection(bool) const;
 	bool catWin( sf::Vector2<int> );
@@ -51,5 +52,5 @@ private:
 	sf::Sprite m_sprite;
 	bool m_reachedTheExit = false;
 	bool m_trapped = false;
-
+	sf::Vector2f m_currDirection;
 };

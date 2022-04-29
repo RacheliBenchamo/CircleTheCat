@@ -19,6 +19,7 @@ private:
 	void handelMusicButtonReleased();
 	void endGame();
 
+	sf::Clock m_gameClock;
 	sf::RenderWindow m_window;
 	sf::Sound m_backGroundMusic;
 	sf::RectangleShape m_background;

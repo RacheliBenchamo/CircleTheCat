@@ -80,7 +80,7 @@ void Controller::handelMouseButtonReleased(sf::Event event)
 	else if (m_statusBar.containsUndoIcon(event))
 		m_board.undo();
 	else
-		m_board.mouseButtonReleased(event, m_window);
+		m_board.mouseButtonReleased(event, m_window, m_gameClock.restart());
 }
 //----------------------------------------------
 //stopping or playing background music

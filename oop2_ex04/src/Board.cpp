@@ -109,7 +109,7 @@ void Board::draw(sf::RenderWindow& window)const
 //------------------------------------------------------
 
 // in case the user clicked on the mouse
-void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
+void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window, sf::Time deltaTime)
 {
 	int x = event.mouseButton.x;
 	int y = event.mouseButton.y;
@@ -124,7 +124,7 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window)
 					y < (m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2)))
 				{
 					coloringCurrentCircle(i, j);
-					doCatStuff();
+					doCatStuff( deltaTime);
 					m_clickCount++;
 					m_clikedCircles.push_back(sf::Vector2f(i, j));
 				}
@@ -191,9 +191,9 @@ void Board::takeCatBackToPrevPos()
 	m_cat.setPos(m_catWay[m_catWay.size() - 1]);
 }
 
-void Board::doCatStuff()
+void Board::doCatStuff(sf::Time& deltaTime)
 {
-	m_cat.move(m_grid);
+	m_cat.move(m_grid, deltaTime);
 
 	if (m_cat.reachedTheExit())
 	{
