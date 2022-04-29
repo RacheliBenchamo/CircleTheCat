@@ -26,17 +26,51 @@ void Cat::move(std::vector<std::vector<sf::CircleShape>> grid, sf::Time& deltaTi
 
 bool Cat::canMove(std::vector<std::vector<sf::CircleShape>> grid, sf::Vector2<int> source)
 {
-	if ((grid[source.x - 1][source.y].getFillColor() == CLICKED_COLOR)
-		&& (grid[source.x + 1][source.y].getFillColor() == CLICKED_COLOR)
-		&& (grid[source.x][source.y - 1].getFillColor() == CLICKED_COLOR)
-		&& (grid[source.x - 1][source.y + 1].getFillColor() == CLICKED_COLOR)
-		&& (grid[source.x + 1][source.y - 1].getFillColor() == CLICKED_COLOR)
-		&& (grid[source.x][source.y + 1].getFillColor() == CLICKED_COLOR))
-	{
-		m_trapped = true;
-		return false;
-	}
-	return true;
+	//BASE_COLOR
+	if (//can move right
+		(grid[source.x][source.y - 1].getFillColor() == BASE_COLOR)
+		//can move right
+		|| (grid[source.x][source.y + 1].getFillColor() == BASE_COLOR)
+		//can move up left
+		|| (isLineEven(source.x) && grid[source.x - 1][source.y - 1].getFillColor() == BASE_COLOR)
+		|| (!isLineEven(source.x) && grid[source.x - 1][source.y].getFillColor() == BASE_COLOR)
+		//can move up right
+		|| (isLineEven(source.x) && grid[source.x - 1][source.y].getFillColor() == BASE_COLOR)
+		|| (!isLineEven(source.x) && grid[source.x - 1][source.y + 1].getFillColor() == BASE_COLOR)
+		//can move down left
+		|| (isLineEven(source.x) && grid[source.x + 1][source.y - 1].getFillColor() == BASE_COLOR)
+		|| (!isLineEven(source.x) && grid[source.x + 1][source.y].getFillColor() == BASE_COLOR)
+		//can move down right
+		|| (isLineEven(source.x) && grid[source.x + 1][source.y].getFillColor() == BASE_COLOR)
+		|| (!isLineEven(source.x) && grid[source.x + 1][source.y + 1].getFillColor() == BASE_COLOR))
+		return true;
+
+	m_trapped = true;		
+	return false;
+
+	//	if(grid[source.x][source.y-1].getFillColor() == CLICKED_COLOR)//can move right
+	//	can move right
+	//	&&(isLineEven(source.x)&&)
+	//	&& (grid[source.x][source.y + 1].getFillColor() == CLICKED_COLOR)
+	//	can move up left
+	//	&& (isLineEven(source.x)&& grid[source.x - 1][source.y - 1].getFillColor() == CLICKED_COLOR)
+	//	&&(!isLineEven(source.x) && grid[source.x - 1][source.y].getFillColor() == CLICKED_COLOR)
+	//	can move up right
+	//	&& (isLineEven(source.x) && grid[source.x - 1][source.y].getFillColor() == CLICKED_COLOR)
+	//	&& (!isLineEven(source.x) && grid[source.x - 1][source.y + 1].getFillColor() == CLICKED_COLOR)
+	//	can move down left
+	//	&& (isLineEven(source.x) && grid[source.x + 1][source.y - 1].getFillColor() == CLICKED_COLOR)
+	//	&& (!isLineEven(source.x) && grid[source.x + 1][source.y].getFillColor() == CLICKED_COLOR)
+	//	can move down right
+	//	&& (isLineEven(source.x) && grid[source.x + 1][source.y ].getFillColor() == CLICKED_COLOR)
+	//	&& (!isLineEven(source.x) && grid[source.x + 1][source.y + 1].getFillColor() == CLICKED_COLOR))
+	//{
+
+	//	m_trapped = true;
+	//	return false;
+	//}
+	//cout << "jj\n";
+	//return true;
 }
 //---------------------------------------------------
 
@@ -193,6 +227,7 @@ bool Cat::catWin( sf::Vector2<int> source)
 	{
 		m_reachedTheExit=true;
 		return true;
+		cout << "true\n";
 	}
 	return false;
 }

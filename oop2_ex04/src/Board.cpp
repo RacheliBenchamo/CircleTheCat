@@ -90,7 +90,11 @@ void Board::ColoringCirclesToBeginningColor()
 void Board::UpdatePaintedCircles()
 {
 	if (!m_restart)
+	{
 		SelectRandomColoredCircles();
+		cout << "\nin SelectRandomColoredCircles\n";
+	}
+		
 	else
 		m_restart = false;
 
@@ -203,6 +207,7 @@ void Board::doCatStuff(sf::Time& deltaTime)
 
 	if (m_cat.trapped())
 	{
+		cout<<"true" ;
 		m_winLevel = true;
 		m_cat.resetTrapped();
 	}
