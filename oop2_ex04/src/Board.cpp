@@ -147,7 +147,7 @@ void Board::restartLevel()
 
 void Board::startNewLevel()
 {
-	m_maxColoredCircles -= 2;
+	m_maxColoredCircles -= 3;
 	m_winLevel = false;
 	setLevel();
 	setCat();
