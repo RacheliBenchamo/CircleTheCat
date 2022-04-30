@@ -90,10 +90,7 @@ void Board::ColoringCirclesToBeginningColor()
 void Board::UpdatePaintedCircles()
 {
 	if (!m_restart)
-	{
 		SelectRandomColoredCircles();
-		cout << "\nin SelectRandomColoredCircles\n";
-	}
 		
 	else
 		m_restart = false;
@@ -108,7 +105,6 @@ void Board::draw(sf::RenderWindow& window)const
 {
 	drawGrid(window);
 	m_cat.draw(window);
-	//window.draw(m_movingCircle);
 }
 //------------------------------------------------------
 
@@ -194,6 +190,7 @@ void Board::takeCatBackToPrevPos()
 	m_catWay.pop_back();
 	m_cat.setPos(m_catWay[m_catWay.size() - 1]);
 }
+//------------------------------------------------------
 
 void Board::doCatStuff(sf::Time& deltaTime)
 {
@@ -207,11 +204,9 @@ void Board::doCatStuff(sf::Time& deltaTime)
 
 	if (m_cat.trapped())
 	{
-		cout<<"true" ;
 		m_winLevel = true;
 		m_cat.resetTrapped();
 	}
 
 	m_catWay.push_back(m_cat.getPos());
-
 }

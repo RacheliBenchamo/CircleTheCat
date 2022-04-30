@@ -1,4 +1,4 @@
-#include "Cat.h"
+#include "MovingObject.h"
 
 
 //---------------------------------------------------
@@ -42,7 +42,7 @@ bool MovingObject::isLineEven(int line)
 //---------------------------------------------------
 // applying BFS on matrix cells starting from source
 
-sf::Vector2i MovingObject::getNextMove(std::vector<std::vector<sf::CircleShape>> grid, sf::Vector2i objPos)
+sf::Vector2i MovingObject::getNextMove(std::vector<std::vector<sf::CircleShape>> grid, sf::Vector2f objPos)
 {
 	std::vector<std::vector<sf::Vector2i>> discover;
 	
@@ -109,23 +109,23 @@ sf::Vector2i MovingObject::getNextMove(std::vector<std::vector<sf::CircleShape>>
 //---------------------------------------------------
 
 void MovingObject::checkDirection(int x, int y, bool visited[BOARD_LEN][BOARD_LEN],
-	std::queue<sf::Vector2<int>>& q,
-	std::vector<std::vector<sf::Vector2<int>>>& discover, sf::Vector2<int> p)
+	std::queue<sf::Vector2i>& q,
+	std::vector<std::vector<sf::Vector2i>>& discover, sf::Vector2i p)
 {
 	if (isValid(y) && isValid(x) && visited[x][y] == false)
 	{
-		q.push(sf::Vector2<int>(x, y));
+		q.push(sf::Vector2i(x, y));
 		visited[x][y] = true;
 		discover[x][y] = sf::Vector2<int>(p.x, p.y);
 	}
 }
 //---------------------------------------------------
 
-void MovingObject::resetMatrix(std::vector<std::vector<sf::Vector2<int>>>& discover)
+void MovingObject::resetMatrix(std::vector<std::vector<sf::Vector2i>>& discover)
 {
 	for (size_t i = 0; i < BOARD_LEN; i++)
 	{
-		std::vector<sf::Vector2<int>> currRow;
+		std::vector<sf::Vector2i> currRow;
 
 		for (size_t j = 0; j < BOARD_LEN; j++)
 		{
