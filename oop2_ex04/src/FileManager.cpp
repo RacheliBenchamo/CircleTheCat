@@ -34,9 +34,8 @@ void FileManager::loadFromFileIcons()
 
 void FileManager::loadAudio()
 {
-	/*m_audio[S_LOSE_LEVEL].loadFromFile("loseLevelSound.wav");
 	m_audio[S_WIN_LEVEL].loadFromFile("winLevelSound.wav");
-	m_audio[S_WIN_GAME].loadFromFile("winGameSound.wav");*/
+	m_audio[S_WIN_GAME].loadFromFile("winGameSound.wav");
 	m_audio[S_BACKROUND].loadFromFile("backgroundMusic.wav");
 
 }

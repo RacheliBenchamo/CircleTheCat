@@ -7,7 +7,6 @@ public:
 	Cat();
 	~Cat() {};
 
-
 	void move(std::vector<std::vector<sf::CircleShape>>, sf::Time& deltaTime) ;
 	void draw (sf::RenderWindow& window) const {window.draw(m_sprite);}
 	void setPos(sf::Vector2f pos) { m_sprite.setPosition(pos); }

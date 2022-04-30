@@ -18,6 +18,9 @@ private:
 	void handelMouseButtonReleased(sf::Event);
 	void handelMusicButtonReleased();
 	void endGame();
+	void winGameScreen();
+	void winLevelScreen();
+	void setWinScreen(backgroundsType, sounds);
 
 	sf::Clock m_gameClock;
 	sf::RenderWindow m_window;

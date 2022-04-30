@@ -10,5 +10,6 @@ configure_file ("musicOff.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("resetButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("undoButton.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Cat.png" ${CMAKE_BINARY_DIR} COPYONLY)
-
+configure_file ("winLevelSound.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("winGameSound.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 

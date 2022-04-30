@@ -32,7 +32,7 @@ const int WINDOW_WIDTH = 1100;
 const int WINDOW_HEIGHT = 920;
 
 //time data
-const int WIN_WIAT = 70;
+const int WIN_WIAT = 700;
 
 //speed data
 const float BASE_SPEED = 100.;
@@ -65,8 +65,7 @@ enum icons
 };
 enum sounds
 {
-	
-	S_WIN_LEVEL, S_WIN_GAME, S_LOSE_LEVEL, S_BACKROUND
+	S_WIN_LEVEL, S_WIN_GAME, S_BACKROUND
 };
 
 enum backgroundsType
@@ -75,10 +74,6 @@ enum backgroundsType
 	WIN_GAME_BACKGROUND
 };
 
-enum giftType
-{
-	TAKE_TO_PREV_LEVEL, MOVE_FAIRIES, TAKE_TIME, ADD_TIME
-};
 
 enum direction
 {

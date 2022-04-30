@@ -40,7 +40,7 @@ void Controller::run()
 		{
 			if (levCount < NUM_OF_LEVELS)
 			{
-				//win level msg
+				winLevelScreen();
 				m_board.startNewLevel();
 				levCount++;
 				m_statusBar.setLevel(levCount);
@@ -103,6 +103,41 @@ void Controller::handelMusicButtonReleased()
 
 void Controller::endGame()
 {
-	//end msg
+	winGameScreen();
 	m_window.close();
+}
+//---------------------------------------------
+//set the win game screen
+
+void Controller::winGameScreen()
+{
+	setWinScreen(WIN_GAME_BACKGROUND, S_WIN_GAME);
+}
+//---------------------------------------------
+//set the win level screen
+
+void Controller::winLevelScreen()
+{
+	setWinScreen(WIN_LEVEL_BACKGROUND, S_WIN_LEVEL);
+}
+//---------------------------------------------------------
+//set the relevant wining screen
+
+void Controller::setWinScreen(backgroundsType backgroundType, sounds soundType)
+{
+	sf::Sound effect;
+	effect.setBuffer(*FileManager::p2FileManager().getSound(soundType));
+	effect.setVolume(VOLUME_BG);
+	effect.play();
+
+	/*sf::RectangleShape background;
+	background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT + STATUS_BAR_HEIGHT });
+	background.setTexture(FileManager::p2FileManager().getBackGround(backgroundType));*/
+
+	for (int i = 0; i < WIN_WIAT && m_window.isOpen(); i++)
+	{
+		//m_window.clear(sf::Color::White);
+		//m_window.draw(background);
+		m_window.display();
+	}
 }

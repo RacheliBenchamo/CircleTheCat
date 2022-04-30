@@ -121,7 +121,8 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window, sf::T
 				if (x > m_grid[i][j].getPosition().x &&
 					x < (m_grid[i][j].getPosition().x + (m_grid[i][j].getRadius() * 2)) &&
 					y > m_grid[i][j].getPosition().y &&
-					y < (m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2)))
+					y < (m_grid[i][j].getPosition().y + (m_grid[i][j].getRadius() * 2))&&
+					m_grid[i][j].getPosition()!=m_cat.getPos())
 				{
 					coloringCurrentCircle(i, j);
 					doCatStuff( deltaTime);
