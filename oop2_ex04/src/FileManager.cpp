@@ -38,7 +38,6 @@ void FileManager::loadAudio()
 	m_audio[S_LOSE_LEVEL].loadFromFile("loseLevelSound.wav");
 	m_audio[S_WIN_GAME].loadFromFile("winGameSound.wav");
 	m_audio[S_BACKROUND].loadFromFile("backgroundMusic.wav");
-
 }
 //--------------------------------------------------
 // load all the buttons
@@ -76,9 +75,8 @@ void FileManager::loadUndoIcon()
 
 void FileManager::loadBackgrounds()
 {
-	
 	m_backgrounds[GAME_BACKGROUND].loadFromFile("gameBackground.png");
-	//m_backgrounds[WIN_GAME_BACKGROUND].loadFromFile("winGameBackground.png");
+	m_backgrounds[WIN_GAME_BACKGROUND].loadFromFile("winGameBackground.png");
 }
 //--------------------------------------------
 

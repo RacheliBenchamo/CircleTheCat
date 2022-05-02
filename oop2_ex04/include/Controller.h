@@ -23,7 +23,7 @@ private:
 	void winGameScreen();
 	void winLevelScreen();
 	void loseLevelScreen();
-	void setWinScreen( sounds);
+	void setWinSound( sounds);
 
 	sf::Clock m_gameClock;
 	sf::RenderWindow m_window;

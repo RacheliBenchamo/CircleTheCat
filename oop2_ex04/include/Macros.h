@@ -8,7 +8,7 @@ const int BOARD_LEN = 11;
 // general data
 const unsigned int NUM_OF_LEVELS = 3;
 const unsigned int NUM_OF_ICONS = 14;
-const unsigned int NUM_OF_SOUNDS = 14;
+const unsigned int NUM_OF_SOUNDS = 4;
 const unsigned int NUM_OF_BACKGROUNDS = 5;
 const unsigned int NUM_OF_DIRECTION = 4;
 const unsigned int P_SIZE = 75; // pixel size
@@ -66,7 +66,7 @@ enum icons
 };
 enum sounds
 {
-	S_WIN_LEVEL, S_WIN_GAME, S_LOSE_LEVEL, S_BACKROUND
+	S_WIN_LEVEL, S_LOSE_LEVEL, S_WIN_GAME, S_BACKROUND
 };
 
 enum backgroundsType
