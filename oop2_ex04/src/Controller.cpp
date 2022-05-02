@@ -126,7 +126,7 @@ void Controller::winGameScreen()
 void Controller::winLevelScreen()
 {
 	m_statusBar.drawWin(m_window);
-	setWinSound(S_WIN_GAME);
+	setWinSound(S_WIN_LEVEL);
 }
 //---------------------------------------------
 //set the win level screen
