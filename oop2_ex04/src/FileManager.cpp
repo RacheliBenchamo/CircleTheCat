@@ -35,6 +35,7 @@ void FileManager::loadFromFileIcons()
 void FileManager::loadAudio()
 {
 	m_audio[S_WIN_LEVEL].loadFromFile("winLevelSound.wav");
+	m_audio[S_LOSE_LEVEL].loadFromFile("loseLevelSound.wav");
 	m_audio[S_WIN_GAME].loadFromFile("winGameSound.wav");
 	m_audio[S_BACKROUND].loadFromFile("backgroundMusic.wav");
 
@@ -77,8 +78,7 @@ void FileManager::loadBackgrounds()
 {
 	
 	m_backgrounds[GAME_BACKGROUND].loadFromFile("gameBackground.png");
-	/*m_backgrounds[WIN_LEVEL_BACKGROUND].loadFromFile("winLevelBackground.png");
-	m_backgrounds[WIN_GAME_BACKGROUND].loadFromFile("winGameBackground.png");*/
+	//m_backgrounds[WIN_GAME_BACKGROUND].loadFromFile("winGameBackground.png");
 }
 //--------------------------------------------
 

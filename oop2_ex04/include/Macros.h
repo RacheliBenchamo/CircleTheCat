@@ -23,7 +23,7 @@ const sf::Color CLICKED_COLOR = sf::Color(188, 143, 143, 255);
 
 //volume data
 const unsigned int VOLUME_BG = 5;
-const unsigned int VOLUME_COLLISION = 6;
+const unsigned int VOLUME_WIN_LOSE = 7;
 
 // window data
 const int MAX_HEIGHT = 12;
@@ -32,7 +32,7 @@ const int WINDOW_WIDTH = 1100;
 const int WINDOW_HEIGHT = 920;
 
 //time data
-const int WIN_WIAT = 700;
+const int WIN_WIAT = 2000;
 
 //speed data
 const float BASE_SPEED = 100.;
@@ -49,6 +49,7 @@ const sf::Vector2f LEVEL_POS = { 900, 200 };
 const sf::Vector2f MUSIC_BUTTON_POS = { 870,  40 };
 const sf::Vector2f RESET_BUTTON_POS = { 1030, 40 };
 const sf::Vector2f UNDO_BUTTON_POS = { 950, 40 };
+const sf::Vector2f WIN_LOSE_POS = { 200, 400 };
 const int HALF_BOARD_DIS = (BOARD_LEN / 2) * CIRCLE_DISTANCE;
 const sf::Vector2f CAT_START_POS= { EVEN_DISTANCE+ HALF_BOARD_DIS, 150+ HALF_BOARD_DIS };
 
@@ -65,7 +66,7 @@ enum icons
 };
 enum sounds
 {
-	S_WIN_LEVEL, S_WIN_GAME, S_BACKROUND
+	S_WIN_LEVEL, S_WIN_GAME, S_LOSE_LEVEL, S_BACKROUND
 };
 
 enum backgroundsType

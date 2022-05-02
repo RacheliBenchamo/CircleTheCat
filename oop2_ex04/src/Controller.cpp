@@ -49,8 +49,10 @@ void Controller::run()
 				endGame();
 		}
 		if (m_board.getLoseLevel())
-			//lose msg
+		{
+			loseLevelScreen();
 			m_board.restartLevel();
+		}
 	}
 }
 //-----------------------------------------------------------------
@@ -111,33 +113,35 @@ void Controller::endGame()
 
 void Controller::winGameScreen()
 {
-	setWinScreen(WIN_GAME_BACKGROUND, S_WIN_GAME);
+	setWinScreen( S_WIN_GAME);
 }
 //---------------------------------------------
 //set the win level screen
 
 void Controller::winLevelScreen()
 {
-	setWinScreen(WIN_LEVEL_BACKGROUND, S_WIN_LEVEL);
+	m_statusBar.drawWin(m_window);
+	setWinScreen( S_WIN_LEVEL);
+}
+//---------------------------------------------
+//set the win level screen
+
+void Controller::loseLevelScreen()
+{
+	m_statusBar.drawLose(m_window);
+	setWinScreen( S_LOSE_LEVEL);
 }
 //---------------------------------------------------------
 //set the relevant wining screen
 
-void Controller::setWinScreen(backgroundsType backgroundType, sounds soundType)
+void Controller::setWinScreen(sounds soundType)
 {
 	sf::Sound effect;
 	effect.setBuffer(*FileManager::p2FileManager().getSound(soundType));
-	effect.setVolume(VOLUME_BG);
+	effect.setVolume(VOLUME_WIN_LOSE);
 	effect.play();
+	m_window.display();
 
-	/*sf::RectangleShape background;
-	background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT + STATUS_BAR_HEIGHT });
-	background.setTexture(FileManager::p2FileManager().getBackGround(backgroundType));*/
-
-	for (int i = 0; i < WIN_WIAT && m_window.isOpen(); i++)
-	{
-		//m_window.clear(sf::Color::White);
-		//m_window.draw(background);
-		m_window.display();
-	}
+	this_thread::sleep_for(std::chrono::milliseconds(WIN_WIAT));
+	
 }

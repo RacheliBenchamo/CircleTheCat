@@ -13,6 +13,8 @@ StatusBar::StatusBar() : m_level(1)
 	setHeadlineText();
 	setCurrClicksText();
 	setLevelText();
+	setWinLevelText();
+	setLoseLevelText();
 	setButtons();
 }
 //------------------------------------------
@@ -60,6 +62,18 @@ void StatusBar::drawButtons(sf::RenderWindow& window)
 }
 //------------------------------------------
 
+void StatusBar::drawWin(sf::RenderWindow& window)
+{
+	window.draw(m_winLevelText);
+}
+//------------------------------------------
+
+void StatusBar::drawLose(sf::RenderWindow& window)
+{
+	window.draw(m_loseLevelText);
+}
+//------------------------------------------
+
 void StatusBar::resetNumOfLevel()
 {
 	m_level = 0;
@@ -82,7 +96,7 @@ void StatusBar::setMusicIcon(const bool isSoundOn)
 void StatusBar::setHeadlineText()
 {
 	this->m_headlineText.setFont(*FileManager::p2FileManager().getFont());
-	this->m_headlineText.setCharacterSize(90);
+	this->m_headlineText.setCharacterSize(STATUS_BAR_CHAR_SIZE*2);
 	this->m_headlineText.setPosition(HEADLINE_POS);
 	this->m_headlineText.setColor(STATUS_BAR_COLOR);
 	this->m_headlineText.setOutlineColor(sf::Color::White);
@@ -110,6 +124,32 @@ void StatusBar::setLevelText()
 	this->m_levelText.setColor(STATUS_BAR_COLOR);
 	this->m_levelText.setOutlineColor(sf::Color(230, 230, 255, 255));
 	this->m_levelText.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS);
+}
+//--------------------------------------------
+
+void StatusBar::setWinLevelText()
+{
+	this->m_winLevelText.setFont(*FileManager::p2FileManager().getFont());
+	this->m_winLevelText.setCharacterSize(STATUS_BAR_CHAR_SIZE*2);
+	this->m_winLevelText.setPosition(WIN_LOSE_POS);
+	this->m_winLevelText.setColor(sf::Color::Black);
+	this->m_winLevelText.setOutlineColor(sf::Color(230, 230, 255, 255));
+	this->m_winLevelText.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS);
+	this->m_winLevelText.setString("Good Job !");
+
+}
+//--------------------------------------------
+
+void StatusBar::setLoseLevelText()
+{
+	this->m_loseLevelText.setFont(*FileManager::p2FileManager().getFont());
+	this->m_loseLevelText.setCharacterSize(STATUS_BAR_CHAR_SIZE*2);
+	this->m_loseLevelText.setPosition(WIN_LOSE_POS);
+	this->m_loseLevelText.setColor(sf::Color::Black);
+	this->m_loseLevelText.setOutlineColor(sf::Color(230, 230, 255, 255));
+	this->m_loseLevelText.setOutlineThickness(STATUS_BAR_OUTLINE_THICKNESS);
+	this->m_loseLevelText.setString("Try Again !");
+
 }
 //--------------------------------------------
 void StatusBar::setButtons()

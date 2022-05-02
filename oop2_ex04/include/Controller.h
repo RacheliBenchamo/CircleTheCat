@@ -1,5 +1,7 @@
 #include "Board.h"
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include "FileManager.h"
 #include "StatusBar.h"
 #include <array>
@@ -20,7 +22,8 @@ private:
 	void endGame();
 	void winGameScreen();
 	void winLevelScreen();
-	void setWinScreen(backgroundsType, sounds);
+	void loseLevelScreen();
+	void setWinScreen( sounds);
 
 	sf::Clock m_gameClock;
 	sf::RenderWindow m_window;
