@@ -40,11 +40,11 @@ private:
 	void drawGrid(sf::RenderWindow& window)const;
 	void takeCatBackToPrevPos();
 
-	int m_maxColoredCircles = 14;
-	bool m_winLevel = false;
-	bool m_loseLevel = false;
-	bool m_restart = false;
-	int m_clickCount = 0;
+	int m_maxColoredCircles ;
+	bool m_winLevel ;
+	bool m_loseLevel ;
+	bool m_restart ;
+	int m_clickCount ;
 	Cat m_cat;
 	std::vector<std::vector<sf::CircleShape>> m_grid;
 	std::vector<sf::Vector2f> m_randomColoredCircles;	

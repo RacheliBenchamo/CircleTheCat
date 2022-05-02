@@ -16,6 +16,14 @@ const unsigned int CIRCLE_RADIUS = 30;
 const unsigned int EVEN_DISTANCE = 120;
 const unsigned int ODD_DISTANCE = 90;
 const int CIRCLE_DISTANCE = 68;
+const int COLORDCIRCLES = 14; 
+
+//const unsigned int MOVE_LEFT = 0;
+//const unsigned int MOVE_RIGHT = 1;
+//const unsigned int MOVE_RIGHT = 2;
+//const unsigned int MOVE_UP_LEFT = 3;
+//const unsigned int MOVE_UP_RIGHT = 4;
+//const unsigned int MOVE_DOWN  = 5;
 
 
 const sf::Color BASE_COLOR = sf::Color(250, 235, 215, 255);
@@ -56,7 +64,8 @@ const sf::Vector2f CAT_START_POS= { EVEN_DISTANCE+ HALF_BOARD_DIS, 150+ HALF_BOA
 const sf::Vector2f BUTTONS_SCALE = { 0.08f, 0.08f };
 
 //direction data
-const sf::Vector2f DVec[] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+const sf::Vector2i EVENDVec[] = {{0,-1}, {0,1}, {-1,-1}, {-1,0},{1,-1},{1,0}};
+const sf::Vector2i ODDDVec[] =  {{0,-1}, {0,1} ,{-1,0}, {-1,1}, {1,0}, {1,1}};
 
 
 enum icons
@@ -78,6 +87,6 @@ enum backgroundsType
 
 enum direction
 {
-	LEFT, RIGHT, UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT
+	LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT
 };
 

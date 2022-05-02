@@ -118,6 +118,7 @@ void Controller::winGameScreen()
 	background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT + STATUS_BAR_HEIGHT });
 	background.setTexture(FileManager::p2FileManager().getBackGround(WIN_GAME_BACKGROUND));
 	m_window.draw(background);
+	m_backGroundMusic.stop();
 	setWinSound( S_WIN_GAME);
 }
 //---------------------------------------------

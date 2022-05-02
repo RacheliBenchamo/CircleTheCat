@@ -3,7 +3,7 @@
 class Animation
 {
 public:
-	Animation(sf::Texture *,sf::Vector2u ,float);
+	Animation(const sf::Texture *,sf::Vector2u ,float);
 	~Animation() {};
 
 	void Update(int row, float deltaTime,bool faseRight );
