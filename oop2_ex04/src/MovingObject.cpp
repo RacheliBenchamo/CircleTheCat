@@ -28,13 +28,13 @@ bool MovingObject::canMove(std::vector<std::vector<sf::CircleShape>> grid, sf::V
 }
 //---------------------------------------------------
 
-bool MovingObject::isValid(int ind)
+bool MovingObject::isValid(int ind)const
 {
 	return ind >= 0 && ind < BOARD_LEN;
 }
 //---------------------------------------------------
 
-bool MovingObject::isLineEven(int line)
+bool MovingObject::isLineEven(int line)const
 {
 	return line % 2 == 0;
 	std::cout << line;

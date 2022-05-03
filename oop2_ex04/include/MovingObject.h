@@ -19,8 +19,8 @@ public:
 	MovingObject() {};
 	 virtual ~MovingObject() {};
 
-	bool reachedTheExit() { return m_reachedTheExit; }
-	bool trapped() { return m_trapped; }
+	bool reachedTheExit() const { return m_reachedTheExit; }
+	bool trapped() const { return m_trapped; }
 	void resetReachedTheExit() { m_reachedTheExit = false; };
 	void resetTrapped() { m_trapped = false; };
 
@@ -29,10 +29,10 @@ protected:
 
 private:
 
-	bool isLineEven(int);
+	bool isLineEven(int)const;
 	sf::Vector2i grillDirection(bool) const;
 	bool winSituation(sf::Vector2i);
-	bool isValid(int);
+	bool isValid(int)const;
 	sf::Vector2i moveObjectRandomly(std::vector<std::vector<sf::CircleShape>>, sf::Vector2i);
 	sf::Vector2i fillVisitedAndFindSource(std::vector<std::vector<sf::CircleShape>>
 		, bool[BOARD_LEN][BOARD_LEN], sf::Vector2f);
