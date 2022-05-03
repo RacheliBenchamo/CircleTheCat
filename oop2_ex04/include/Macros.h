@@ -18,13 +18,6 @@ const unsigned int ODD_DISTANCE = 90;
 const int CIRCLE_DISTANCE = 68;
 const int COLORDCIRCLES = 14; 
 
-//const unsigned int MOVE_LEFT = 0;
-//const unsigned int MOVE_RIGHT = 1;
-//const unsigned int MOVE_RIGHT = 2;
-//const unsigned int MOVE_UP_LEFT = 3;
-//const unsigned int MOVE_UP_RIGHT = 4;
-//const unsigned int MOVE_DOWN  = 5;
-
 
 const sf::Color BASE_COLOR = sf::Color(250, 235, 215, 255);
 const sf::Color CLICKED_COLOR = sf::Color(188, 143, 143, 255);

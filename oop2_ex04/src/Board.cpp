@@ -4,8 +4,9 @@
 // board c-tor 
 Board::Board():
 	m_clickCount(0), m_maxColoredCircles(COLORDCIRCLES), m_winLevel(false),
-	m_loseLevel(false), m_restart(false), m_cat()
+	m_loseLevel(false), m_restart(false), m_cat(), m_movingCircle(CIRCLE_RADIUS)
 {
+	//m_movingCircle.setSize(sf::Vector2f((float)P_SIZE, (float)P_SIZE));
 	setBoard();
 }
 //------------------------------------------------------
@@ -107,6 +108,7 @@ void Board::draw(sf::RenderWindow& window)const
 {
 	drawGrid(window);
 	m_cat.draw(window);
+	window.draw(m_movingCircle);
 }
 //------------------------------------------------------
 
@@ -133,10 +135,24 @@ void Board::mouseButtonReleased(sf::Event event, sf::RenderWindow& window, sf::T
 				}
 }
 //------------------------------------------------------
-void Board::mouseButtonMoved(sf::Event event, sf::RenderWindow& window, sf::Time deltaTime)
-{
 
+void Board::mouseButtonMoved(sf::Event event)
+{
+	auto location = sf::Vector2f(float(event.mouseMove.x), float(event.mouseMove.y));
+
+		for (int i = 0; i < BOARD_LEN; i++) 
+			for (int j = 0; j < BOARD_LEN; j++)
+				if (m_grid[i][j].getGlobalBounds().contains(location))
+				{
+					m_movingCircle.setPosition(m_grid[i][j].getPosition());
+					m_movingCircle.setOutlineColor(sf::Color::Black);
+					m_movingCircle.setFillColor(sf::Color::Transparent);
+					m_movingCircle.setOutlineThickness(4);
+					break;
+				}
+			
 }
+//------------------------------------------------------
 
 void Board::restartLevel()
 {

@@ -16,7 +16,7 @@ public:
 
 	void draw(sf::RenderWindow& window)const;
 	void mouseButtonReleased(sf::Event , sf::RenderWindow& , sf::Time );
-	void mouseButtonMoved(sf::Event, sf::RenderWindow&, sf::Time);
+	void mouseButtonMoved(sf::Event);
 	void setClickCount(const int clicks) { m_clickCount = clicks; }
 	int getClickCount()const { return m_clickCount; }
 	void setWinLevel(const bool isWin) { m_winLevel = isWin; }
@@ -41,6 +41,7 @@ private:
 	void drawGrid(sf::RenderWindow& window)const;
 	void takeCatBackToPrevPos();
 
+	sf::CircleShape m_movingCircle;
 	int m_maxColoredCircles ;
 	bool m_winLevel ;
 	bool m_loseLevel ;

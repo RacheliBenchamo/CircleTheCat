@@ -68,6 +68,10 @@ void Controller::CheckOutWhatEvent( sf::Event event)
 	case sf::Event::MouseButtonReleased:
 		handelMouseButtonReleased(event);
 		break;
+	case sf::Event::MouseMoved:
+		m_board.mouseButtonMoved(event);
+		break;
+		
 	}
 }
 //----------------------------------------------
