@@ -58,6 +58,7 @@ const sf::Vector2f MUSIC_BUTTON_POS = { 870,  40 };
 const sf::Vector2f RESET_BUTTON_POS = { 1030, 40 };
 const sf::Vector2f UNDO_BUTTON_POS = { 950, 40 };
 const sf::Vector2f WIN_LOSE_POS = { 200, 400 };
+const sf::Vector2f DISAPPEAR_POS = { -100, -100 };
 const int HALF_BOARD_DIS = (BOARD_LEN / 2) * CIRCLE_DISTANCE;
 const sf::Vector2f CAT_START_POS= { EVEN_DISTANCE+ HALF_BOARD_DIS, 150+ HALF_BOARD_DIS };
 

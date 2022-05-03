@@ -113,6 +113,7 @@ void Controller::endGame()
 
 void Controller::winGameScreen()
 {
+	m_board.draw(m_window);
 	m_window.clear(sf::Color::White);
 	sf::RectangleShape background;
 	background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT + STATUS_BAR_HEIGHT });
@@ -126,6 +127,7 @@ void Controller::winGameScreen()
 
 void Controller::winLevelScreen()
 {
+	m_board.draw(m_window);
 	m_statusBar.drawWin(m_window);
 	setWinSound(S_WIN_LEVEL);
 }
@@ -134,6 +136,7 @@ void Controller::winLevelScreen()
 
 void Controller::loseLevelScreen()
 {
+	m_board.draw(m_window);
 	m_statusBar.drawLose(m_window);
 	setWinSound( S_LOSE_LEVEL);
 }

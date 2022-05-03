@@ -202,6 +202,7 @@ void Board::doCatStuff(sf::Time& deltaTime)
 	if (m_cat.reachedTheExit())
 	{
 		m_loseLevel = true;
+		m_cat.setPos(DISAPPEAR_POS);
 		m_cat.resetReachedTheExit();
 	}
 
