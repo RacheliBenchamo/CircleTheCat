@@ -7,16 +7,13 @@ const int BOARD_LEN = 11;
 
 // general data
 const unsigned int NUM_OF_LEVELS = 3;
-const unsigned int NUM_OF_ICONS = 14;
 const unsigned int NUM_OF_SOUNDS = 4;
 const unsigned int NUM_OF_BACKGROUNDS = 5;
-const unsigned int NUM_OF_DIRECTION = 4;
-const unsigned int P_SIZE = 75; // pixel size
 const unsigned int CIRCLE_RADIUS = 30;
 const unsigned int EVEN_DISTANCE = 120;
 const unsigned int ODD_DISTANCE = 90;
 const int CIRCLE_DISTANCE = 68;
-const int COLORDCIRCLES = 14; 
+const int COLORD_CIRCLES = 14; 
 
 
 const sf::Color BASE_COLOR = sf::Color(250, 235, 215, 255);
@@ -35,9 +32,6 @@ const int WINDOW_HEIGHT = 920;
 //time data
 const int WIN_WIAT = 2000;
 
-//speed data
-const float BASE_SPEED = 100.;
-
 // for the status bar
 const sf::Color STATUS_BAR_COLOR = sf::Color(153, 153, 255, 255);
 const int STATUS_BAR_HEIGHT = 200;
@@ -50,7 +44,7 @@ const sf::Vector2f LEVEL_POS = { 900, 200 };
 const sf::Vector2f MUSIC_BUTTON_POS = { 870,  40 };
 const sf::Vector2f RESET_BUTTON_POS = { 1030, 40 };
 const sf::Vector2f UNDO_BUTTON_POS = { 950, 40 };
-const sf::Vector2f WIN_LOSE_POS = { 200, 400 };
+const sf::Vector2f WIN_LOSE_POS = { 270, 400 };
 const sf::Vector2f DISAPPEAR_POS = { -100, -100 };
 const int HALF_BOARD_DIS = (BOARD_LEN / 2) * CIRCLE_DISTANCE;
 const sf::Vector2f CAT_START_POS= { EVEN_DISTANCE+ HALF_BOARD_DIS, 150+ HALF_BOARD_DIS };
@@ -58,8 +52,8 @@ const sf::Vector2f CAT_START_POS= { EVEN_DISTANCE+ HALF_BOARD_DIS, 150+ HALF_BOA
 const sf::Vector2f BUTTONS_SCALE = { 0.08f, 0.08f };
 
 //direction data
-const sf::Vector2i EVENDVec[] = {{0,-1}, {0,1}, {-1,-1}, {-1,0},{1,-1},{1,0}};
-const sf::Vector2i ODDDVec[] =  {{0,-1}, {0,1} ,{-1,0}, {-1,1}, {1,0}, {1,1}};
+const sf::Vector2i EVEN_DVec[] = {{0,-1}, {0,1}, {-1,-1}, {-1,0},{1,-1},{1,0}};
+const sf::Vector2i ODD_DVec[] =  {{0,-1}, {0,1} ,{-1,0}, {-1,1}, {1,0}, {1,1}};
 
 
 enum icons

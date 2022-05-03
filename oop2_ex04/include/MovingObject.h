@@ -38,7 +38,7 @@ private:
 	void resetMatrix(std::vector<std::vector<sf::Vector2<int>>>&);
 	sf::Vector2i calaulateFirstMove(std::vector<std::vector<sf::Vector2<int>>>, sf::Vector2i, sf::Vector2i);
 	bool canMove(std::vector<std::vector<sf::CircleShape>>, sf::Vector2i);
-	void checkDirection(int x, int y, bool visited[BOARD_LEN][BOARD_LEN],
+	void checkDirection( sf::Vector2i, bool visited[BOARD_LEN][BOARD_LEN],
 		std::queue<sf::Vector2i>& q,
 		std::vector<std::vector<sf::Vector2i>>& discover, sf::Vector2i p);
 

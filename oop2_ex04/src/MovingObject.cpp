@@ -45,14 +45,14 @@ bool MovingObject::isLineEven(int line)const
 sf::Vector2i MovingObject::getNextMove(std::vector<std::vector<sf::CircleShape>> grid, sf::Vector2f objPos)
 {
 	std::vector<std::vector<sf::Vector2i>> discover;
-	
+
 	bool visited[BOARD_LEN][BOARD_LEN];	// To keep track of visited vertex. Marking
 	// blocked cells as visited.
 	std::queue<sf::Vector2i > q;
 	sf::Vector2i p;
 
 	resetMatrix(discover);
-	sf::Vector2i source =fillVisitedAndFindSource(grid, visited, objPos);
+	sf::Vector2i source = fillVisitedAndFindSource(grid, visited, objPos);
 
 	if (winSituation(source))
 		return { -1,-1 };
@@ -74,49 +74,44 @@ sf::Vector2i MovingObject::getNextMove(std::vector<std::vector<sf::CircleShape>>
 				return p;
 			return calaulateFirstMove(discover, source, discover[p.x][p.y]);
 		}
-		//moving left
-		checkDirection(p.x, p.y - 1, visited, q, discover, p);
 
-		// moving right 
-		checkDirection(p.x, p.y + 1, visited, q, discover, p);
+		checkDirection(p + EVEN_DVec[LEFT], visited, q, discover, p);
 
-		//moving up left
+		checkDirection(p + EVEN_DVec[RIGHT], visited, q, discover, p);
+
 		if (isLineEven(p.x))
-			checkDirection(p.x - 1, p.y - 1, visited, q, discover, p);
+			checkDirection(p + EVEN_DVec[UP_LEFT], visited, q, discover, p);
 		else
-			checkDirection(p.x - 1, p.y, visited, q, discover, p);
+			checkDirection(p + ODD_DVec[UP_LEFT], visited, q, discover, p);
 
-		//moving up right
 		if (isLineEven(p.x))
-			checkDirection(p.x - 1, p.y, visited, q, discover, p);
+			checkDirection(p + EVEN_DVec[UP_RIGHT], visited, q, discover, p);
 		else
-			checkDirection(p.x - 1, p.y + 1, visited, q, discover, p);
+			checkDirection(p + ODD_DVec[UP_RIGHT], visited, q, discover, p);
 
-		// moving down left 
 		if (isLineEven(p.x))
-			checkDirection(p.x + 1, p.y - 1, visited, q, discover, p);
+			checkDirection(p + EVEN_DVec[DOWN_LEFT], visited, q, discover, p);
 		else
-			checkDirection(p.x + 1, p.y, visited, q, discover, p);
+			checkDirection(p + ODD_DVec[DOWN_LEFT], visited, q, discover, p);
 
-		// moving down right 
 		if (isLineEven(p.x))
-			checkDirection(p.x + 1, p.y, visited, q, discover, p);
+			checkDirection(p + EVEN_DVec[DOWN_RIGHT], visited, q, discover, p);
 		else
-			checkDirection(p.x + 1, p.y + 1, visited, q, discover, p);
+			checkDirection(p + ODD_DVec[DOWN_RIGHT], visited, q, discover, p);
 	}
 	return moveObjectRandomly(grid, source);
 }
 //---------------------------------------------------
 
-void MovingObject::checkDirection(int x, int y, bool visited[BOARD_LEN][BOARD_LEN],
+void MovingObject::checkDirection( sf::Vector2i dir, bool visited[BOARD_LEN][BOARD_LEN],
 	std::queue<sf::Vector2i>& q,
 	std::vector<std::vector<sf::Vector2i>>& discover, sf::Vector2i p)
 {
-	if (isValid(y) && isValid(x) && visited[x][y] == false)
+	if (isValid(dir.y) && isValid(dir.x) && visited[dir.x][dir.y] == false)
 	{
-		q.push(sf::Vector2i(x, y));
-		visited[x][y] = true;
-		discover[x][y] = sf::Vector2<int>(p.x, p.y);
+		q.push(dir);
+		visited[dir.x][dir.y] = true;
+		discover[dir.x][dir.y] = sf::Vector2<int>(p.x, p.y);
 	}
 }
 //---------------------------------------------------
@@ -212,19 +207,18 @@ sf::Vector2i MovingObject::grillDirection(bool even) const
 	switch ((direction)dir)
 	{
 	case LEFT:
-		return { 0, -1 };
+		return EVEN_DVec[LEFT];
 	case RIGHT:
-		return  { 0, 1 };
+	    return EVEN_DVec[RIGHT];
 	case UP_RIGHT:
-		if (even) return { -1, 0 }; else return { -1, 1 };
+		if (even) return EVEN_DVec[UP_RIGHT]; else return ODD_DVec[UP_RIGHT];
 	case UP_LEFT:
-		if (even) return { -1, -1 }; else return { -1, 0 };
+		if (even) return EVEN_DVec[UP_LEFT]; else return ODD_DVec[UP_LEFT];
 	case DOWN_RIGHT:
-		if (even) return { 1, 0 }; else return { 1, 1 };
+		if (even) return EVEN_DVec[DOWN_RIGHT]; else return ODD_DVec[DOWN_RIGHT];
 	case DOWN_LEFT:
-		if (even) return { 1, -1 }; else return { 1, 0 };
+		if (even) return EVEN_DVec[DOWN_LEFT]; else return ODD_DVec[DOWN_LEFT];
 	}
 	return { 0, 0 };
 
 }
-

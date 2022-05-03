@@ -32,7 +32,6 @@ private:
 	void loadUndoIcon();
 	void loadBackgrounds();
 
-	sf::Texture m_icons[NUM_OF_ICONS];
 	sf::Texture m_backgrounds[NUM_OF_BACKGROUNDS];
 	sf::Texture m_musicTexture[2];
 	sf::Texture m_restartIcon;

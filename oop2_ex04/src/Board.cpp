@@ -3,10 +3,9 @@
 
 // board c-tor 
 Board::Board():
-	m_clickCount(0), m_maxColoredCircles(COLORDCIRCLES), m_winLevel(false),
+	m_clickCount(0), m_maxColoredCircles(COLORD_CIRCLES), m_winLevel(false),
 	m_loseLevel(false), m_restart(false), m_cat(), m_movingCircle(CIRCLE_RADIUS)
 {
-	//m_movingCircle.setSize(sf::Vector2f((float)P_SIZE, (float)P_SIZE));
 	setBoard();
 }
 //------------------------------------------------------
