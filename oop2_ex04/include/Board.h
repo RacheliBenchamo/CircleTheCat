@@ -16,6 +16,7 @@ public:
 
 	void draw(sf::RenderWindow& window)const;
 	void mouseButtonReleased(sf::Event , sf::RenderWindow& , sf::Time );
+	void mouseButtonMoved(sf::Event, sf::RenderWindow&, sf::Time);
 	void setClickCount(const int clicks) { m_clickCount = clicks; }
 	int getClickCount()const { return m_clickCount; }
 	void setWinLevel(const bool isWin) { m_winLevel = isWin; }

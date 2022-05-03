@@ -25,7 +25,7 @@ FileManager& FileManager::p2FileManager()
 
 void FileManager::loadFromFileIcons()
 {
-	m_catIcon.loadFromFile("goodbird.png");
+	m_catIcon.loadFromFile("Cat.png");
 
 	this->m_font.loadFromFile("Seagram tfb.ttf");
 }
