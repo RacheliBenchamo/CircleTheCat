@@ -23,13 +23,12 @@ public:
 	bool trapped() const { return m_trapped; }
 	void resetReachedTheExit() { m_reachedTheExit = false; };
 	void resetTrapped() { m_trapped = false; };
+	bool isLineEven(int)const;
 
 protected:
 	sf::Vector2i getNextMove(std::vector<std::vector<sf::CircleShape>>, sf::Vector2f);
 
 private:
-
-	bool isLineEven(int)const;
 	sf::Vector2i grillDirection(bool) const;
 	bool winSituation(sf::Vector2i);
 	bool isValid(int)const;

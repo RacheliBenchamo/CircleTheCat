@@ -11,7 +11,7 @@ Animation::Animation(const sf::Texture* texture, sf::Vector2u imageCount, float 
 	uvRect.height = texture->getSize().y / float(m_imageCount.y);
 }
 
-void Animation::Update(int row, float deltaTime, bool faseRight)
+void Animation::Update(int row, float &deltaTime, bool faseRight)
 {
 	m_currentImage.y = row;
 	m_totalTime += deltaTime;

@@ -18,7 +18,7 @@ public:
 
 private:
 	//void updateAnimation();
-	//void updateAnimation(sf::Vector2f, sf::Vector2f);
+	//void updateAnimation(sf::Vector2f, sf::Vector2f, sf::Time& deltaTime);
 	
 	sf::Sprite m_sprite;
 	sf::Vector2f m_currDirection;

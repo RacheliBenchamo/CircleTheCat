@@ -6,7 +6,7 @@ public:
 	Animation(const sf::Texture *,sf::Vector2u ,float);
 	~Animation() {};
 
-	void Update(int row, float deltaTime,bool faseRight );
+	void Update(int row, float &deltaTime,bool faseRight );
 sf::IntRect uvRect;
 
 private:

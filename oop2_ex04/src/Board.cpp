@@ -4,7 +4,7 @@
 // board c-tor 
 Board::Board():
 	m_clickCount(0), m_maxColoredCircles(COLORDCIRCLES), m_winLevel(false),
-	m_loseLevel(false), m_restart(false), m_cat(sf::Vector2u(5,2),0.5f,0.3f)
+	m_loseLevel(false), m_restart(false), m_cat(sf::Vector2u(5,2),0.3f,100.0f)
 {
 	setBoard();
 }
