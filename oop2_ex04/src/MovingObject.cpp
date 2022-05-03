@@ -67,7 +67,7 @@ sf::Vector2i MovingObject::getNextMove(std::vector<std::vector<sf::CircleShape>>
 		p = q.front();
 		q.pop();
 
-		// Destination found;
+		// Destination found
 		if (p.x == 0 || p.x == 10 || p.y == 0 || p.y == 10)
 		{
 			if (source == discover[p.x][p.y])
