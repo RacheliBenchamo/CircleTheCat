@@ -85,7 +85,7 @@ void Board::ColoringCirclesToBeginningColor()
 {
 	for (int i = 0; i < BOARD_LEN; i++)
 		for (int j = 0; j < BOARD_LEN; j++)
-			unColoringCurrentCircle(i,j);
+			UnColoringCurrentCircle(i,j);
 }
 //------------------------------------------------------
 
@@ -180,12 +180,12 @@ void Board::undo()
 		sf::Vector2f pos = m_clikedCircles[m_clikedCircles.size()-1];
 		m_clikedCircles.pop_back();
 		m_clickCount--;
-		unColoringCurrentCircle(pos.x, pos.y);
+		UnColoringCurrentCircle(pos.x, pos.y);
 	}
 }
 //------------------------------------------------------
 
-void Board::unColoringCurrentCircle(int x, int y)
+void Board::UnColoringCurrentCircle(int x, int y)
 {
 	m_grid[x][y].setFillColor(BASE_COLOR);
 	m_grid[x][y].setOutlineColor(CLICKED_COLOR);

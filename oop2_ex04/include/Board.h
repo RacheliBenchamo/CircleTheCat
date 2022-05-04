@@ -36,7 +36,7 @@ private:
 	void SelectRandomColoredCircles();
 	void UpdatePaintedCircles();
 	void ColoringCirclesToBeginningColor();
-	void unColoringCurrentCircle(int, int);
+	void UnColoringCurrentCircle(int, int);
 	void coloringCurrentCircle(int, int);
 	void drawGrid(sf::RenderWindow& window)const;
 	void takeCatBackToPrevPos();
