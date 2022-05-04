@@ -34,7 +34,7 @@ Cat::Cat()
 {
 	auto m_pTexture = FileManager::p2FileManager().getCatTexture();
 	m_sprite.setTexture(*m_pTexture);
-	m_sprite.scale(BUTTONS_SCALE);
+	m_sprite.scale(MOVING_OBJ_SCALE);
 }
 
 

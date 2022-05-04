@@ -50,6 +50,9 @@ const int HALF_BOARD_DIS = (BOARD_LEN / 2) * CIRCLE_DISTANCE;
 const sf::Vector2f CAT_START_POS= { EVEN_DISTANCE+ HALF_BOARD_DIS, 150+ HALF_BOARD_DIS };
 
 const sf::Vector2f BUTTONS_SCALE = { 0.08f, 0.08f };
+const sf::Vector2f MOVING_OBJ_SCALE = { 0.1f, 0.1f };
+
+
 
 //direction data
 const sf::Vector2i EVEN_DVec[] = {{0,-1}, {0,1}, {-1,-1}, {-1,0},{1,-1},{1,0}};
