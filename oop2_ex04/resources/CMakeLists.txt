@@ -15,8 +15,6 @@ configure_file ("winGameSound.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("loseLevelSound.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 
 configure_file ("Cat.png" ${CMAKE_BINARY_DIR} COPYONLY)
-configure_file ("goodbird.png" ${CMAKE_BINARY_DIR} COPYONLY)
-configure_file ("blackbird.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 
 

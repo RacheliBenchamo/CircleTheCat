@@ -5,6 +5,5 @@
                                             "StatusBar.cpp"
                                          "Cat.cpp"
                                          "MovingObject.cpp"
-                                         "Animation.cpp"
 
                                               )
